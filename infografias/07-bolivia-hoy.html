@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte VII · Bolivia hoy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .live{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono';font-size:11px;color:var(--ok);border:1px solid rgba(61,214,140,.4);border-radius:999px;padding:4px 10px}
+  .live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  .live.off{color:var(--warn);border-color:rgba(255,197,61,.4)}.live.off::before{background:var(--warn);box-shadow:0 0 8px var(--warn)}
+  .src{font-family:'JetBrains Mono';font-size:10.5px;color:var(--dim);margin-top:8px;line-height:1.5}
+  .audit td:nth-child(2){font-family:'JetBrains Mono'}
+  .q4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;counter-reset:q}
+  .q4 .card::before{counter-increment:q;content:counter(q);font-family:'JetBrains Mono';color:var(--acento);font-weight:600;font-size:12px;display:block;margin-bottom:4px}
+  .chart-wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .chart-wrap h4{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .chart-wrap h4 span{font-family:'JetBrains Mono';font-size:11px;color:var(--muted);font-weight:500}
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Parte VII</div>
+      <h1>Bolivia hoy: los datos, con fuente</h1>
+      <p class="sub">Tablero con datos oficiales del INE y del BCB, actualizado automáticamente. Cada cifra lleva institución y fecha.</p>
+    </div>
+    <div class="meta"><span class="live" id="live">cargando</span><div id="upd" style="margin-top:6px"></div></div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>Tablero de indicadores<small>Lo que dicen las fuentes primarias en este momento.</small></h2></div>
+    <div class="stat" id="stat"></div>
+    <div class="src" id="src"></div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Inflación: mensual, acumulada e interanual<small>Serie del IPC (INE, base 2016 = 100) republicada por el BCB. Toca una barra para ver el detalle.</small></h2></div>
+    <div class="two">
+      <div class="chart-wrap"><h4>Inflación interanual <span>a 12 meses, %</span></h4><canvas class="chart" id="c1"></canvas></div>
+      <div class="chart-wrap"><h4>Inflación mensual <span>variación respecto al mes anterior, %</span></h4><canvas class="chart" id="c2"></canvas></div>
+    </div>
+    <div class="note" id="ipcnote"></div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>Tipo de cambio oficial<small>Bs por USD. Régimen flexible desde el 26 de junio de 2026 (RM 245/2026, RD 88/2026). La serie se construye con una observación por día de actualización, más las referencias del cuaderno.</small></h2></div>
+    <div class="chart-wrap"><h4>Bs / USD <span id="tcsub"></span></h4><canvas class="chart" id="c3"></canvas></div>
+    <div class="grid" style="margin-top:12px" id="tcgrid"></div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">04</div><h2>El diagnóstico en una palabra: estanflación<small>Contracción del producto e inflación alta al mismo tiempo. Es incómoda porque los instrumentos que combaten una cosa agravan la otra.</small></h2></div>
+    <div class="stat">
+      <div><small>PIB real 2025</small><b class="bad">−1,58%</b><span>INE · preliminar · 21 abr 2026</span></div>
+      <div><small>PIB IV trim 2025 (interanual)</small><b class="bad">−1,14%</b><span>INE · 21 abr 2026</span></div>
+      <div><small>Inflación acumulada 2025</small><b class="bad">20,40%</b><span>INE · 6 ene 2026 · máx. desde 1988</span></div>
+      <div><small>IPM junio 2026</small><b class="warn">+5,74%</b><span>INE · precios al por mayor</span></div>
+    </div>
+    <p style="margin-top:12px">Enfriar la economía para bajar la inflación profundiza la caída del producto; estimularla para sostener el producto alimenta los precios. Esta tensión conecta la Unidad III con la Unidad V.</p>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">05</div><h2>Cronología reciente</h2></div>
+    <div class="timeline">
+      <div class="ev"><div class="d">8 nov 2025</div><div class="t">Cambio de gobierno</div><p>Asume Rodrigo Paz.</p></div>
+      <div class="ev"><div class="d">1 dic 2025</div><div class="t">Valor Referencial del Dólar</div><p>El BCB empieza a publicarlo conforme a estándares internacionales; se unifica el mercado cambiario.</p></div>
+      <div class="ev"><div class="d">17 dic 2025</div><div class="t">Emergencia económica</div><p>D.S. 5503 retira la subvención a los principales carburantes y fija nuevos precios de gasolina y diésel.</p></div>
+      <div class="ev"><div class="d">6 ene 2026</div><div class="t">Inflación 2025: 20,40%</div><p>INE. La más alta desde 1988.</p></div>
+      <div class="ev"><div class="d">Abr 2026</div><div class="t">El Valor Referencial pasa a ser referencia oficial</div><p>El BCB recibe asistencia técnica del FMI para alinear sus estadísticas externas al Manual de Balanza de Pagos.</p></div>
+      <div class="ev"><div class="d">21 abr 2026</div><div class="t">PIB 2025: −1,58%</div><p>Dato preliminar del INE.</p></div>
+      <div class="ev"><div class="d">26 jun 2026</div><div class="t">Tipo de cambio flexible</div><p>Termina el esquema fijo vigente durante más de una década.</p></div>
+      <div class="ev"><div class="d">30 jul 2026</div><div class="t">Reglamentos del BCB</div><p>Compra y venta de dólares (RD 117/2026) y encaje legal (RD 118/2026).</p></div>
+      <div class="ev"><div class="d">17 ago 2026</div><div class="t">Primer RIPoM</div><p>Reporte de Inflación y Política Monetaria, con información a junio. La base monetaria pasa a ser el ancla nominal.</p></div>
+    </div>
+    <div class="callout info"><b>Por qué importa el cambio de régimen.</b> Con tipo de cambio fijo el ancla nominal era el dólar: disciplinaba los precios pero exigía reservas. Al flotar, el ancla se reemplaza por la base monetaria. Si el déficit fiscal se sigue financiando con emisión, el ancla no se sostiene, por muy flexible que sea el tipo de cambio.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">06</div><h2>Ejercicio de auditoría: cuando las fuentes no coinciden<small>Las diapositivas de la Sesión 1 citan +0,5% para 2025. El INE publicó −1,58%. Ninguna es falsa: son objetos distintos.</small></h2></div>
+    <div class="twrap audit"><table class="t">
+      <thead><tr><th>Fuente</th><th>Cifra 2025</th><th>Naturaleza del dato</th></tr></thead>
+      <tbody>
+      <tr><td>INE</td><td style="color:var(--bad)">−1,58%</td><td>Dato observado (preliminar), abril de 2026</td></tr>
+      <tr><td>CEPAL</td><td>+0,5%</td><td>Proyección del Balance Preliminar, diciembre de 2025</td></tr>
+      <tr><td>FMI</td><td>+0,5%</td><td>Proyección del WEO de octubre de 2025</td></tr>
+      <tr><td>Banco Mundial</td><td>−0,5%</td><td>Proyección, con estimaciones negativas también para 2026 y 2027</td></tr>
+      <tr><td>PGE 2026</td><td>+0,9% (2026)</td><td>Meta oficial de presupuesto, no proyección independiente</td></tr>
+      </tbody></table></div>
+    <h3 style="margin-top:18px">Las cuatro preguntas para cualquier cifra</h3>
+    <div class="q4">
+      <div class="card"><h4>¿Observado o proyección?</h4><p>Una proyección de diciembre no se compara con un dato de abril. La mayoría de las "contradicciones" se disuelven al fechar cada cifra.</p></div>
+      <div class="card"><h4>¿Cuál es el año base?</h4><p>Bolivia migró de base 1990 a base 2017; las series no son directamente comparables.</p></div>
+      <div class="card"><h4>¿Nominal o real?</h4><p>Toda la Parte III existe por esta pregunta.</p></div>
+      <div class="card"><h4>¿Preliminar o definitivo?</h4><p>El dato del INE de 2025 es preliminar y puede revisarse.</p></div>
+    </div>
+    <div class="callout" style="margin-top:12px"><b>El FMI omitió sus proyecciones para Bolivia 2026–2030</b> en el WEO de octubre de 2025 por incertidumbre significativa. Que un organismo prefiera no proyectar es, en sí mismo, información.</div>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>INE · BCB · CEPAL · FMI · Banco Mundial</div></footer>
+  <div class="aguayo"></div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);const f=(n,d)=>(n===null||n===undefined)?'—':Number(n).toFixed(d).replace('.',',');
+  const MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  function bars(cv,rows,key,color,opts={}){
+    const ctx=cv.getContext('2d');const r=cv.parentElement.getBoundingClientRect();const W=Math.max(280,Math.floor(r.width)-28),H=Math.round(W*0.52),dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const vals=rows.map(x=>x[key]);const mx=Math.max(...vals,0.1),mn=Math.min(...vals,0);const pad={l:38,r:8,t:16,b:26};
+    const Y=v=>pad.t+(mx-v)/(mx-mn||1)*(H-pad.t-pad.b);const bw=(W-pad.l-pad.r)/rows.length;
+    ctx.strokeStyle='#26262E';ctx.lineWidth=1;ctx.font='500 9.5px JetBrains Mono';ctx.fillStyle='#9A9890';ctx.textAlign='right';
+    const step=(mx-mn)>15?5:(mx-mn)>6?2:1;for(let v=Math.ceil(mn/step)*step;v<=mx;v+=step){const y=Y(v);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillText(v+'%',pad.l-5,y+3);}
+    ctx.strokeStyle='#8A8880';ctx.beginPath();ctx.moveTo(pad.l,Y(0));ctx.lineTo(W-pad.r,Y(0));ctx.stroke();
+    rows.forEach((x,i)=>{const v=x[key];const c=v<0?'#3DD68C':color;ctx.fillStyle=c;const x0=pad.l+i*bw+bw*0.15;const y0=Y(Math.max(v,0)),y1=Y(Math.min(v,0));ctx.fillRect(x0,y0,bw*0.7,Math.max(1,y1-y0));
+      if(i===rows.length-1||x.periodo.endsWith('-12')){ctx.fillStyle='#9A9890';ctx.textAlign='center';ctx.font='500 9.5px JetBrains Mono';ctx.fillText(x.periodo.endsWith('-12')?x.anio:MES[+x.periodo.slice(5)-1]+' '+String(x.anio).slice(2),x0+bw*0.35,H-8);}});
+    cv.onclick=e=>{const rect=cv.getBoundingClientRect();const i=Math.floor((e.clientX-rect.left-pad.l)/bw);if(rows[i])$('ipcnote').innerHTML=`<b>${rows[i].mes} ${rows[i].anio}</b> · IPC ${f(rows[i].indice,2)} · mensual ${f(rows[i].mensual,2)}% · acumulada ${f(rows[i].acumulada,2)}% · interanual ${f(rows[i].interanual,2)}%`;};
+  }
+  function line(cv,pts,label){
+    const ctx=cv.getContext('2d');const r=cv.parentElement.getBoundingClientRect();const W=Math.max(280,Math.floor(r.width)-28),H=Math.round(W*0.42),dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const pad={l:40,r:14,t:16,b:26};const t0=new Date(pts[0].fecha).getTime(),t1=new Date(pts[pts.length-1].fecha).getTime();
+    const vs=pts.map(p=>p.oficial);const mn=Math.floor(Math.min(...vs)-0.5),mx=Math.ceil(Math.max(...vs)+0.5);
+    const X=t=>pad.l+(t-t0)/((t1-t0)||1)*(W-pad.l-pad.r),Y=v=>pad.t+(mx-v)/(mx-mn)*(H-pad.t-pad.b);
+    ctx.strokeStyle='#26262E';ctx.font='500 9.5px JetBrains Mono';ctx.fillStyle='#9A9890';ctx.textAlign='right';
+    for(let v=mn;v<=mx;v+=1){ctx.beginPath();ctx.moveTo(pad.l,Y(v));ctx.lineTo(W-pad.r,Y(v));ctx.stroke();ctx.fillText(v.toFixed(0),pad.l-5,Y(v)+3);}
+    ctx.beginPath();ctx.strokeStyle='#E8236B';ctx.lineWidth=2.5;pts.forEach((p,i)=>{const x=X(new Date(p.fecha).getTime()),y=Y(p.oficial);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();
+    pts.forEach(p=>{const x=X(new Date(p.fecha).getTime()),y=Y(p.oficial);ctx.fillStyle='#FFC53D';ctx.beginPath();ctx.arc(x,y,4,0,7);ctx.fill();});
+    ctx.fillStyle='#9A9890';ctx.textAlign='left';ctx.fillText(pts[0].fecha,pad.l,H-8);ctx.textAlign='right';ctx.fillText(pts[pts.length-1].fecha,W-pad.r,H-8);
+  }
+  function render(d){
+    const ipc=d.ipc||[],last=ipc[ipc.length-1]||{},tc=d.tipo_cambio||{},ufv=d.ufv||{};
+    const dec=ipc.filter(x=>x.periodo.endsWith('-12'));
+    $('live').textContent='datos '+(d.actualizado||'').slice(0,10);$('live').classList.toggle('off',!!(d.errores&&d.errores.length));
+    $('upd').textContent=d.errores&&d.errores.length?'con avisos: '+d.errores.join('; '):'INE · BCB';
+    const var2=(a,b)=>a&&b?((a/b-1)*100):null;
+    $('stat').innerHTML=`
+      <div><small>Inflación interanual</small><b class="${last.interanual>10?'bad':last.interanual>5?'warn':'ok'}">${f(last.interanual,2)}%</b><span>INE · ${last.mes||''} ${last.anio||''}</span></div>
+      <div><small>Inflación acumulada ${last.anio||''}</small><b class="${last.acumulada>10?'bad':'warn'}">${f(last.acumulada,2)}%</b><span>INE · a ${last.mes||''}</span></div>
+      <div><small>Inflación mensual</small><b class="${last.mensual>1.5?'bad':last.mensual<0?'ok':'warn'}">${f(last.mensual,2)}%</b><span>INE · ${last.mes||''} ${last.anio||''}</span></div>
+      <div><small>Tipo de cambio oficial</small><b>Bs ${f(tc.oficial_bs_usd,2)}</b><span>BCB · ${tc.fecha||''} · tabla ${tc.tabla||''}</span></div>
+      <div><small>UFV</small><b>Bs ${f(ufv.valor,5)}</b><span>BCB · ${ufv.fecha||''}</span></div>
+      ${dec.map(x=>`<div><small>Inflación ${x.anio}</small><b class="${x.interanual>10?'bad':x.interanual>5?'warn':'ok'}">${f(x.interanual,2)}%</b><span>INE · cierre de año</span></div>`).join('')}`;
+    $('src').innerHTML=Object.values(d.fuentes||{}).join('<br>');
+    if(ipc.length){bars($('c1'),ipc,'interanual','#E8236B');bars($('c2'),ipc,'mensual','#4FB0FF');
+      const top=ipc.reduce((a,b)=>b.interanual>a.interanual?b:a);$('ipcnote').innerHTML=`Último dato: <b>${last.mes} ${last.anio}</b>, interanual ${f(last.interanual,2)}%. Pico de la serie: ${top.mes} ${top.anio} con ${f(top.interanual,2)}%. Los meses en verde en el gráfico mensual son deflación (variación negativa).`;}
+    const h=d.tc_historico||[];if(h.length>1){line($('c3'),h);const a=h[0].oficial,b=h[h.length-1].oficial;$('tcsub').textContent=`${h[0].fecha} → ${h[h.length-1].fecha}`;
+      $('tcgrid').innerHTML=`<div class="card"><h4>Encarecimiento del dólar</h4><p class="mono" style="color:var(--text);font-size:22px">${f((b/a-1)*100,1)}%</p><p>De Bs ${f(a,2)} a Bs ${f(b,2)} por dólar. Es la cifra relevante para un importador.</p></div>
+        <div class="card"><h4>Pérdida de valor del boliviano</h4><p class="mono" style="color:var(--text);font-size:22px">−${f((1-a/b)*100,1)}%</p><p>1 − ${f(a,2)}/${f(b,2)}. Es la cifra relevante para quien mide sus ahorros en dólares. Las dos describen lo mismo desde cada moneda.</p></div>
+        <div class="card"><h4>Otras monedas · ${tc.fecha||''}</h4><p>${['BRL','ARS','CLP','PEN','EUR','CNY'].filter(k=>tc.monedas&&tc.monedas[k]).map(k=>`${k} Bs ${f(tc.monedas[k].bs_por_unidad,3)}`).join(' · ')||'—'}</p></div>`;}
+  }
+  fetch('../data/macro.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{render(d);window.addEventListener('resize',()=>render(d));}).catch(e=>{$('live').textContent='sin datos';$('live').classList.add('off');$('stat').innerHTML='<div><small>Error</small><b class="bad">—</b><span>No se pudo leer data/macro.json. Abre el portafolio desde un servidor (GitHub Pages) o ejecuta scripts/actualizar_datos.py.</span></div>';});
+})();
+</script>
+</body>
+</html>

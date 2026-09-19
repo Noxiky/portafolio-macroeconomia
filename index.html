@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D0D10">
+<title>Portafolio · Macroeconomía · Michelle Griffiths</title>
+<meta name="description" content="Portafolio de Macroeconomía y Empresa: apuntes interactivos, trabajos, ejercicios resueltos y datos macroeconómicos de Bolivia en vivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  body{min-height:100vh}
+  .poster{min-height:100vh;display:flex;flex-direction:column}
+  @media (min-width:1140px){.poster{margin:0 auto;box-shadow:none;max-width:none;background:transparent}.poster>*{max-width:1080px;margin-left:auto;margin-right:auto;width:100%}.poster>.aguayo{max-width:none}}
+  /* nav */
+  nav.top{position:sticky;top:0;z-index:20;background:rgba(13,13,16,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav.top .in{max-width:1080px;margin:0 auto;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;gap:14px;height:58px}
+  nav.top .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;letter-spacing:-.01em;text-decoration:none;color:var(--text)}
+  nav.top .brand i{display:inline-block;width:14px;height:24px;border-radius:3px;background:repeating-linear-gradient(-28deg,#B4102F 0 3px,#E8236B 3px 5px,#1F3FBF 5px 7px,#F0B429 7px 8px,#178A4C 8px 11px,#F26A21 11px 12px)}
+  nav.top .brand small{display:block;font-family:'JetBrains Mono';font-weight:500;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
+  nav.top .tabs{margin:0;gap:4px}
+  nav.top .tabs button{flex:0 0 auto;min-width:0;padding:8px 14px;font-size:13px;border-radius:999px}
+  @media (max-width:720px){nav.top .tabs{display:none}}
+  nav.bottom{display:none;position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(13,13,16,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+  nav.bottom .tabs{margin:0;gap:0;padding:6px 6px}
+  nav.bottom .tabs button{border:0;background:transparent;border-radius:10px;padding:8px 4px;font-size:11px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--dim);min-width:0}
+  nav.bottom .tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  nav.bottom .tabs button.on{color:var(--acento);background:rgba(232,35,107,.1)}
+  @media (max-width:720px){nav.bottom{display:block}.poster{padding-bottom:72px}}
+  /* views */
+  .view{display:none;flex:1}.view.on{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  /* hero */
+  .hero2{padding:clamp(28px,6vw,56px) var(--pad) clamp(18px,4vw,36px);display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:end}
+  @media (max-width:720px){.hero2{grid-template-columns:1fr}}
+  .hero2 .live{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hero2 .live div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .hero2 .live small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .hero2 .live b{font-family:'JetBrains Mono';font-size:20px;font-weight:600}
+  .hero2 .live span{display:block;font-family:'JetBrains Mono';font-size:10px;color:var(--dim);margin-top:2px}
+  /* apuntes cards */
+  .notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+  .note-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;cursor:pointer;transition:border-color .15s,transform .15s;display:flex;flex-direction:column;gap:8px;min-height:170px;text-decoration:none;color:inherit;position:relative;overflow:hidden}
+  .note-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--acento);opacity:0;transition:opacity .15s}
+  .note-card:hover,.note-card:focus-visible{border-color:var(--acento);transform:translateY(-2px)}
+  .note-card:hover::before{opacity:1}
+  .note-card .id{font-family:'JetBrains Mono';font-size:11px;color:var(--acento);font-weight:600;letter-spacing:.1em}
+  .note-card h3{font-size:17px;font-weight:800;letter-spacing:-.01em;margin:0}
+  .note-card p{font-size:13px;flex:1}
+  .note-card .tags{display:flex;flex-wrap:wrap;gap:4px}
+  .note-card .tags span{font-family:'JetBrains Mono';font-size:10px;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+  .note-card .tags span.i{border-color:rgba(79,176,255,.4);color:var(--azul)}
+  /* viewer */
+  .viewer{position:fixed;inset:0;z-index:40;background:var(--bg);display:none;flex-direction:column}
+  .viewer.on{display:flex}
+  .viewer .bar{display:flex;align-items:center;gap:10px;padding:10px var(--pad);border-bottom:1px solid var(--line);background:var(--bg2);height:52px}
+  .viewer .bar b{font-size:14px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .viewer .bar button,.viewer .bar a{background:transparent;border:1px solid var(--line);color:var(--muted);font:600 12px 'Manrope';padding:7px 12px;border-radius:999px;cursor:pointer;text-decoration:none;white-space:nowrap}
+  .viewer .bar button:hover,.viewer .bar a:hover{border-color:var(--acento);color:var(--text)}
+  .viewer iframe{flex:1;border:0;width:100%;background:var(--bg)}
+  /* trabajos */
+  .work{display:grid;grid-template-columns:120px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px;align-items:start}
+  @media (max-width:560px){.work{grid-template-columns:1fr}}
+  .work .d{font-family:'JetBrains Mono';font-size:12px;color:var(--acento);font-weight:600}
+  .work .d small{display:block;color:var(--dim);font-weight:500;margin-top:3px}
+  .work h3{font-size:16px;margin-bottom:4px}
+  .work p{font-size:13.5px}
+  .work .st{display:inline-block;font-family:'JetBrains Mono';font-size:10.5px;padding:2px 8px;border-radius:999px;border:1px solid;margin-top:8px}
+  .work .st.entregado{color:var(--ok);border-color:rgba(61,214,140,.5)}.work .st.pendiente{color:var(--warn);border-color:rgba(255,197,61,.5)}.work .st.calificado{color:var(--azul);border-color:rgba(79,176,255,.5)}
+  .work a{color:var(--text);font-size:13px;text-decoration:none;border-bottom:1px solid var(--acento);margin-left:8px}
+  .empty{border:1px dashed var(--line);border-radius:12px;padding:24px;text-align:center;color:var(--dim);font-size:13.5px}
+  .empty code{font-family:'JetBrains Mono';color:var(--muted)}
+  /* ejercicios */
+  .ex{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px}
+  .ex .h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;cursor:pointer}
+  .ex .h h3{font-size:15px;margin:0}
+  .ex .h span{font-family:'JetBrains Mono';font-size:11px;color:var(--dim);white-space:nowrap}
+  .ex .en{font-size:13.5px;margin-top:8px}
+  .ex .sol{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);line-height:1.55}
+  .ex .sol::before{content:"SOLUCIÓN";display:block;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.12em;color:var(--ok);margin-bottom:6px}
+  .ex.open .sol{display:block}
+  .ex .btn{margin-top:8px;background:transparent;border:1px solid var(--line);color:var(--muted);font:600 12px 'Manrope';padding:6px 12px;border-radius:999px;cursor:pointer}
+  .ex.open .btn{border-color:var(--ok);color:var(--ok)}
+  /* datos */
+  .dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+  .chart-wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .chart-wrap h4{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .chart-wrap h4 span{font-family:'JetBrains Mono';font-size:11px;color:var(--muted);font-weight:500}
+  .src{font-family:'JetBrains Mono';font-size:10.5px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono';font-size:11px;color:var(--ok);border:1px solid rgba(61,214,140,.4);border-radius:999px;padding:4px 10px}
+  .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  .pill.off{color:var(--warn);border-color:rgba(255,197,61,.4)}.pill.off::before{background:var(--warn);box-shadow:0 0 8px var(--warn)}
+  .fx{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+  .fx div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+  .fx small{display:block;font-family:'JetBrains Mono';font-size:10px;color:var(--dim)}
+  .fx b{font-family:'JetBrains Mono';font-size:14px;font-weight:600}
+  .fx span{display:block;font-size:10.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo thin"></div>
+  <nav class="top"><div class="in">
+    <a class="brand" href="#apuntes"><i></i><div>Macroeconomía<small>Portafolio · M. Griffiths</small></div></a>
+    <div class="tabs" id="tabs-top"></div>
+  </div></nav>
+
+  <!-- APUNTES -->
+  <div class="view on" id="v-apuntes">
+    <header class="hero2">
+      <div>
+        <div class="kicker">Macroeconomía y Empresa · UCB · 2026</div>
+        <h1 style="margin-top:10px">Apuntes</h1>
+        <p class="sub" id="apuntes-sub">Cada parte del cuaderno convertida en una infografía interactiva: simuladores, calculadoras y casos paso a paso. Toca una tarjeta para abrirla.</p>
+      </div>
+      <div class="live" id="hero-live"></div>
+    </header>
+    <section style="border-top:0;padding-top:0"><div class="notes" id="notes"></div></section>
+  </div>
+
+  <!-- TRABAJOS -->
+  <div class="view" id="v-trabajos">
+    <header class="hero2"><div><div class="kicker">Entregas del semestre</div><h1 style="margin-top:10px">Trabajos</h1><p class="sub">Tareas, talleres y actividades con IA, en orden cronológico. Cada entrada enlaza al archivo entregado.</p></div></header>
+    <section style="border-top:0;padding-top:0" id="works"></section>
+  </div>
+
+  <!-- EJERCICIOS -->
+  <div class="view" id="v-ejercicios">
+    <header class="hero2"><div><div class="kicker">Práctica</div><h1 style="margin-top:10px">Ejercicios</h1><p class="sub">Los de clase y los añadidos con datos bolivianos. Intenta resolverlos antes de abrir la solución.</p></div></header>
+    <section style="border-top:0;padding-top:0" id="exs"></section>
+  </div>
+
+  <!-- DATOS -->
+  <div class="view" id="v-datos">
+    <header class="hero2"><div><div class="kicker">INE · BCB</div><h1 style="margin-top:10px">Datos macroeconómicos</h1><p class="sub">Inflación, tipo de cambio y UFV leídos de las fuentes primarias. Se actualizan automáticamente cada día.</p></div><div><span class="pill" id="dpill">cargando</span><div class="src" id="dupd"></div></div></header>
+    <section style="border-top:0;padding-top:0">
+      <div class="stat" id="dstat"></div>
+      <div class="dgrid" style="margin-top:14px">
+        <div class="chart-wrap"><h4>Inflación interanual <span>INE · a 12 meses · %</span></h4><canvas class="chart" id="d1"></canvas></div>
+        <div class="chart-wrap"><h4>Inflación mensual <span>INE · variación mensual · %</span></h4><canvas class="chart" id="d2"></canvas></div>
+        <div class="chart-wrap"><h4>Tipo de cambio oficial <span id="d3sub">BCB · Bs/USD</span></h4><canvas class="chart" id="d3"></canvas></div>
+        <div class="chart-wrap"><h4>Cotizaciones <span id="d4sub">BCB · Bs por unidad</span></h4><div class="fx" id="fx"></div></div>
+      </div>
+      <div class="note" id="dnote"></div>
+      <div class="twrap" style="margin-top:14px"><table class="t" id="dtable"><thead><tr><th>Mes</th><th>IPC</th><th>Mensual</th><th>Acumulada</th><th>Interanual</th></tr></thead><tbody></tbody></table></div>
+      <div class="src" id="dsrc"></div>
+    </section>
+  </div>
+
+  <footer><div><b id="f-name">Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div id="f-right">INE · BCB</div></footer>
+  <div class="aguayo"></div>
+</div>
+
+<nav class="bottom"><div class="tabs" id="tabs-bottom"></div></nav>
+
+<div class="viewer" id="viewer">
+  <div class="bar"><button id="v-close">← Volver</button><b id="v-title"></b><a id="v-open" target="_blank" rel="noopener">Abrir aparte ↗</a></div>
+  <iframe id="v-frame" title="Infografía"></iframe>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);const f=(n,d)=>(n===null||n===undefined)?'—':Number(n).toFixed(d).replace('.',',');
+  const TABS=[['apuntes','Apuntes','<svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h8M16 4v4h4"/></svg>'],
+              ['trabajos','Trabajos','<svg viewBox="0 0 24 24"><path d="M3 7h18v13H3z"/><path d="M8 7V4h8v3M3 12h18"/></svg>'],
+              ['ejercicios','Ejercicios','<svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>'],
+              ['datos','Datos','<svg viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M6 16V9M11 16V5M16 16v-7M21 16V11"/></svg>']];
+  function show(id,push=true){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+id));
+    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab===id));
+    if(push)history.replaceState(null,'','#'+id);window.scrollTo({top:0});if(id==='datos')setTimeout(()=>drawAll(),30);}
+  ['tabs-top','tabs-bottom'].forEach(host=>{$(host).innerHTML=TABS.map(t=>`<button data-tab="${t[0]}">${host==='tabs-bottom'?t[2]:''}<span>${t[1]}</span></button>`).join('');});
+  document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+  const initial=(location.hash||'#apuntes').slice(1);show(TABS.some(t=>t[0]===initial)?initial:'apuntes',false);
+  window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(TABS.some(t=>t[0]===h))show(h,false);});
+
+  // viewer
+  function openNote(a){$('v-title').textContent=a.titulo;$('v-open').href=a.archivo;$('v-frame').src=a.archivo;$('viewer').classList.add('on');document.body.style.overflow='hidden';}
+  function closeNote(){$('viewer').classList.remove('on');$('v-frame').src='about:blank';document.body.style.overflow='';}
+  $('v-close').addEventListener('click',closeNote);window.addEventListener('keydown',e=>{if(e.key==='Escape')closeNote();});
+
+  // contenido
+  fetch('data/contenido.json',{cache:'no-store'}).then(r=>r.json()).then(c=>{
+    $('f-name').textContent=c.estudiante;document.querySelector('.brand small').textContent='Portafolio · '+c.estudiante.split(' ')[0]+' '+c.estudiante.split(' ')[1];
+    $('notes').innerHTML=c.apuntes.map((a,i)=>`<a class="note-card" href="${a.archivo}" data-i="${i}"><div class="id">${a.unidad}${a.sesiones?' · '+a.sesiones:''}</div><h3>${a.titulo}</h3><p>${a.resumen}</p><div class="tags">${(a.interactivo||[]).map(t=>`<span class="i">${t}</span>`).join('')}</div></a>`).join('');
+    $('notes').querySelectorAll('.note-card').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openNote(c.apuntes[+el.dataset.i]);}));
+    const ws=(c.trabajos||[]).slice().sort((a,b)=>b.fecha.localeCompare(a.fecha));
+    $('works').innerHTML=ws.length?ws.map(w=>`<div class="work"><div class="d">${w.fecha}<small>${w.tipo||''}</small></div><div><h3>${w.titulo}</h3><p>${w.descripcion||''}</p><span class="st ${w.estado||'pendiente'}">${w.estado||'pendiente'}</span>${w.archivo?`<a href="${w.archivo}" target="_blank" rel="noopener">abrir archivo ↗</a>`:''}${w.nota?` <span class="st calificado">nota ${w.nota}</span>`:''}</div></div>`).join(''):'<div class="empty">Todavía no hay trabajos. Se agregan en <code>data/contenido.json</code> y el archivo va en <code>trabajos/</code>.</div>';
+    $('exs').innerHTML=(c.ejercicios||[]).map(e=>`<div class="ex"><div class="h"><h3>${e.n}. ${e.titulo}</h3><span>${e.sesion||''}</span></div><p class="en">${e.enunciado}</p><button class="btn">Ver solución</button><div class="sol">${e.solucion}</div></div>`).join('');
+    $('exs').querySelectorAll('.ex').forEach(el=>{const t=()=>{el.classList.toggle('open');el.querySelector('.btn').textContent=el.classList.contains('open')?'Ocultar solución':'Ver solución';};el.querySelector('.h').addEventListener('click',t);el.querySelector('.btn').addEventListener('click',t);});
+  }).catch(()=>{$('notes').innerHTML='<div class="empty">No se pudo leer <code>data/contenido.json</code>. Abre el portafolio desde un servidor (GitHub Pages).</div>';});
+
+  // datos
+  let D=null;const MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  function bars(cv,rows,key,color){const ctx=cv.getContext('2d');const r=cv.parentElement.getBoundingClientRect();const W=Math.max(260,Math.floor(r.width)-28),H=Math.round(W*0.5),dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const vals=rows.map(x=>x[key]);const mx=Math.max(...vals,0.1),mn=Math.min(...vals,0);const pad={l:38,r:8,t:14,b:24};
+    const Y=v=>pad.t+(mx-v)/(mx-mn||1)*(H-pad.t-pad.b);const bw=(W-pad.l-pad.r)/rows.length;
+    ctx.strokeStyle='#26262E';ctx.lineWidth=1;ctx.font='500 9.5px JetBrains Mono';ctx.fillStyle='#9A9890';ctx.textAlign='right';
+    const step=(mx-mn)>15?5:(mx-mn)>6?2:1;for(let v=Math.ceil(mn/step)*step;v<=mx;v+=step){const y=Y(v);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillText(v+'%',pad.l-5,y+3);}
+    ctx.strokeStyle='#8A8880';ctx.beginPath();ctx.moveTo(pad.l,Y(0));ctx.lineTo(W-pad.r,Y(0));ctx.stroke();
+    rows.forEach((x,i)=>{const v=x[key];ctx.fillStyle=v<0?'#3DD68C':color;const x0=pad.l+i*bw+bw*0.15;const y0=Y(Math.max(v,0)),y1=Y(Math.min(v,0));ctx.fillRect(x0,y0,bw*0.7,Math.max(1,y1-y0));
+      if(x.periodo.endsWith('-12')||i===rows.length-1){ctx.fillStyle='#9A9890';ctx.textAlign='center';ctx.fillText(x.periodo.endsWith('-12')?x.anio:MES[+x.periodo.slice(5)-1]+' '+String(x.anio).slice(2),x0+bw*0.35,H-7);}});
+    cv.onclick=e=>{const rect=cv.getBoundingClientRect();const i=Math.floor((e.clientX-rect.left-pad.l)/bw);if(rows[i])$('dnote').innerHTML=`<b>${rows[i].mes} ${rows[i].anio}</b> · IPC ${f(rows[i].indice,2)} · mensual ${f(rows[i].mensual,2)}% · acumulada ${f(rows[i].acumulada,2)}% · interanual ${f(rows[i].interanual,2)}%`;};}
+  function line(cv,pts){const ctx=cv.getContext('2d');const r=cv.parentElement.getBoundingClientRect();const W=Math.max(260,Math.floor(r.width)-28),H=Math.round(W*0.5),dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const pad={l:38,r:12,t:14,b:24};const t0=new Date(pts[0].fecha).getTime(),t1=new Date(pts[pts.length-1].fecha).getTime();const vs=pts.map(p=>p.oficial);const mn=Math.floor(Math.min(...vs)-0.5),mx=Math.ceil(Math.max(...vs)+0.5);
+    const X=t=>pad.l+(t-t0)/((t1-t0)||1)*(W-pad.l-pad.r),Y=v=>pad.t+(mx-v)/(mx-mn)*(H-pad.t-pad.b);
+    ctx.strokeStyle='#26262E';ctx.font='500 9.5px JetBrains Mono';ctx.fillStyle='#9A9890';ctx.textAlign='right';for(let v=mn;v<=mx;v++){ctx.beginPath();ctx.moveTo(pad.l,Y(v));ctx.lineTo(W-pad.r,Y(v));ctx.stroke();ctx.fillText(v,pad.l-5,Y(v)+3);}
+    ctx.beginPath();ctx.strokeStyle='#E8236B';ctx.lineWidth=2.5;pts.forEach((p,i)=>{const x=X(new Date(p.fecha).getTime()),y=Y(p.oficial);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();
+    pts.forEach(p=>{ctx.fillStyle='#FFC53D';ctx.beginPath();ctx.arc(X(new Date(p.fecha).getTime()),Y(p.oficial),4,0,7);ctx.fill();});
+    ctx.fillStyle='#9A9890';ctx.textAlign='left';ctx.fillText(pts[0].fecha,pad.l,H-7);ctx.textAlign='right';ctx.fillText(pts[pts.length-1].fecha,W-pad.r,H-7);}
+  function drawAll(){if(!D)return;const ipc=D.ipc||[];if(ipc.length){bars($('d1'),ipc,'interanual','#E8236B');bars($('d2'),ipc,'mensual','#4FB0FF');}const h=D.tc_historico||[];if(h.length>1)line($('d3'),h);}
+  fetch('data/macro.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{D=d;const ipc=d.ipc||[],last=ipc[ipc.length-1]||{},tc=d.tipo_cambio||{},ufv=d.ufv||{};
+    const cls=v=>v>10?'bad':v>5?'warn':'ok';
+    $('hero-live').innerHTML=`<div><small>Inflación interanual</small><b class="${cls(last.interanual)}">${f(last.interanual,2)}%</b><span>INE · ${last.mes||''} ${last.anio||''}</span></div><div><small>Dólar oficial</small><b>Bs ${f(tc.oficial_bs_usd,2)}</b><span>BCB · ${tc.fecha||''}</span></div>`;
+    $('dpill').textContent='datos '+(d.actualizado||'').slice(0,10);$('dpill').classList.toggle('off',!!(d.errores&&d.errores.length));$('dupd').textContent=d.errores&&d.errores.length?'avisos: '+d.errores.join('; '):'';
+    const dec=ipc.filter(x=>x.periodo.endsWith('-12'));
+    $('dstat').innerHTML=`<div><small>Inflación interanual</small><b class="${cls(last.interanual)}">${f(last.interanual,2)}%</b><span>INE · ${last.mes||''} ${last.anio||''}</span></div>
+      <div><small>Acumulada ${last.anio||''}</small><b class="${last.acumulada>10?'bad':'warn'}">${f(last.acumulada,2)}%</b><span>INE · a ${last.mes||''}</span></div>
+      <div><small>Mensual</small><b class="${last.mensual>1.5?'bad':last.mensual<0?'ok':'warn'}">${f(last.mensual,2)}%</b><span>INE · ${last.mes||''}</span></div>
+      <div><small>Dólar oficial</small><b>Bs ${f(tc.oficial_bs_usd,2)}</b><span>BCB · ${tc.fecha||''} · tabla ${tc.tabla||''}</span></div>
+      <div><small>UFV</small><b>Bs ${f(ufv.valor,5)}</b><span>BCB · ${ufv.fecha||''}</span></div>
+      ${dec.map(x=>`<div><small>Inflación ${x.anio}</small><b class="${cls(x.interanual)}">${f(x.interanual,2)}%</b><span>INE · cierre</span></div>`).join('')}`;
+    const h=d.tc_historico||[];if(h.length>1){$('d3sub').textContent=`BCB · ${h[0].fecha} → ${h[h.length-1].fecha}`;}
+    const ms=tc.monedas||{};$('d4sub').textContent='BCB · '+(tc.fecha||'');$('fx').innerHTML=Object.keys(ms).slice(0,16).map(k=>`<div><small>${k}</small><b>${f(ms[k].bs_por_unidad,3)}</b><span>${ms[k].pais.toLowerCase()}</span></div>`).join('');
+    $('dtable').querySelector('tbody').innerHTML=ipc.slice().reverse().slice(0,24).map(x=>`<tr><td>${x.mes} ${x.anio}</td><td class="n">${f(x.indice,2)}</td><td class="n" style="color:${x.mensual<0?'var(--ok)':x.mensual>1.5?'var(--bad)':'inherit'}">${f(x.mensual,2)}%</td><td class="n">${f(x.acumulada,2)}%</td><td class="n">${f(x.interanual,2)}%</td></tr>`).join('');
+    $('dsrc').innerHTML=Object.values(d.fuentes||{}).join('<br>')+'<br>Actualización automática diaria (GitHub Actions) · script: scripts/actualizar_datos.py';
+    if(ipc.length){const top=ipc.reduce((a,b)=>b.interanual>a.interanual?b:a);$('dnote').innerHTML=`Último dato: <b>${last.mes} ${last.anio}</b>, interanual ${f(last.interanual,2)}%. Pico de la serie: ${top.mes} ${top.anio} con ${f(top.interanual,2)}%. Toca una barra para ver el detalle del mes.`;}
+    if($('v-datos').classList.contains('on'))drawAll();window.addEventListener('resize',drawAll);
+  }).catch(()=>{$('dpill').textContent='sin datos';$('dpill').classList.add('off');$('hero-live').innerHTML='';$('dstat').innerHTML='<div><small>Datos</small><b class="bad">—</b><span>Abre desde GitHub Pages o ejecuta scripts/actualizar_datos.py</span></div>';});
+})();
+</script>
+</body>
+</html>

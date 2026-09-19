@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso · Formulario, cadenas causales y autoevaluación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .form{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px}
+  .form div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;font-size:13px;color:var(--muted)}
+  .form div b{font-family:'JetBrains Mono';font-weight:500;color:var(--text);font-size:13px;text-align:right}
+  .errs{counter-reset:e;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px}
+  .errs div{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--bad);border-radius:8px;padding:10px 14px;font-size:13.5px;color:var(--muted);display:grid;grid-template-columns:26px 1fr;gap:8px}
+  .errs div::before{counter-increment:e;content:counter(e);font-family:'JetBrains Mono';color:var(--bad);font-weight:600}
+  .chains{counter-reset:c}
+  .chains .card{margin-bottom:8px;display:grid;grid-template-columns:30px 1fr;gap:10px}
+  .chains .card::before{counter-increment:c;content:counter(c);font-family:'JetBrains Mono';color:var(--acento);font-weight:600;font-size:13px}
+  .chains .card h4{font-size:14px}
+  .chains .flow span{font-size:12.5px;padding:6px 10px}
+  .score{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Repaso</div>
+      <h1>Síntesis, formulario y autoevaluación</h1>
+      <p class="sub">Para la noche antes del parcial: las cadenas causales, las fórmulas, los errores que cuestan puntos y dieciocho preguntas con respuesta oculta.</p>
+    </div>
+    <div class="meta"><b>P1</b>Parcial 1 · Sesión 9</div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>Mapa de relaciones: las cadenas causales<small>Dejar de memorizar conceptos aislados y seguir las cadenas.</small></h2></div>
+    <div class="chains">
+      <div class="card"><div><h4>Emisión e inflación</h4><div class="flow"><span>Financiamiento con emisión</span><i>→</i><span>más dinero</span><i>→</i><span>presión sobre precios</span><i>→</i><span>inflación</span><i>→</i><span>pérdida de poder adquisitivo</span><i>→</i><span class="hi">impuesto inflacionario</span></div></div></div>
+      <div class="card"><div><h4>Inflación y demanda de dinero</h4><div class="flow"><span>Inflación ↑</span><i>→</i><span>mantener moneda nacional es menos atractivo</span><i>→</i><span>demanda de dinero ↓</span><i>→</i><span class="hi">bienes, divisas, activos alternativos ↑</span></div></div></div>
+      <div class="card"><div><h4>Hiperinflación y dolarización</h4><div class="flow"><span>Inflación extrema</span><i>→</i><span>pérdida de confianza</span><i>→</i><span>huida de la moneda</span><i>→</i><span class="hi">dolarización</span></div></div></div>
+      <div class="card"><div><h4>Precios y PIB</h4><div class="flow"><span>Nivel de precios ↑</span><i>→</i><span>PIB nominal ↑</span><i>→</i><span>no implica PIB real ↑</span><i>→</i><span class="hi">aislar el efecto precio</span></div></div></div>
+      <div class="card"><div><h4>Mercado laboral</h4><div class="flow"><span>PEA = ocupados + desocupados</span><i>→</i><span>u = desocupados / PEA</span><i>→</i><span class="hi">u no resume la calidad del empleo</span></div></div></div>
+      <div class="card"><div><h4>Límite del impuesto inflacionario</h4><div class="flow"><span>π ↑</span><i>→</i><span>recaudación ↑ hasta cierto punto</span><i>→</i><span>M/P cae más rápido</span><i>→</i><span>recaudación real ↓</span><i>→</i><span class="hi">espiral</span></div></div></div>
+      <div class="card"><div><h4>Ancla nominal</h4><div class="flow"><span>Tipo de cambio fijo = ancla externa</span><i>→</i><span>se abandona</span><i>→</i><span>nueva ancla: base monetaria</span><i>→</i><span class="hi">si el déficit se financia con emisión, no se sostiene</span></div></div></div>
+      <div class="card"><div><h4>Subsidio y precios relativos</h4><div class="flow"><span>Retiro de subvención a carburantes</span><i>→</i><span>transporte ↑</span><i>→</i><span>IPC ↑</span><i>→</i><span class="hi">ajuste de precios relativos, no necesariamente inflación monetaria permanente</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Formulario</h2></div>
+    <div class="form">
+      <div>PIB por el gasto<b>Y = C + G + I + (X − M)</b></div>
+      <div>Valor agregado bruto<b>VAB = P − CI</b></div>
+      <div>PIB por la producción<b>Σ VAB</b></div>
+      <div>PIB por el ingreso<b>w + r + i + π (+ ingreso mixto)</b></div>
+      <div>PIB a precios de mercado<b>PIB c.f. + (imp. indirectos − subsidios)</b></div>
+      <div>PNB / INB<b>PIB + renta neta de factores del exterior</b></div>
+      <div>PIB nominal<b>Σ q<sub>t</sub> × p<sub>t</sub></b></div>
+      <div>PIB real<b>Σ q<sub>t</sub> × p<sub>base</sub></b></div>
+      <div>Deflactor del PIB<b>(nominal / real) × 100</b></div>
+      <div>Inflación por el deflactor<b>(D<sub>t</sub> − D<sub>t−1</sub>) / D<sub>t−1</sub></b></div>
+      <div>Inflación por el IPC<b>(IPC<sub>t</sub> − IPC<sub>t−1</sub>) / IPC<sub>t−1</sub></b></div>
+      <div>Encadenar inflaciones<b>Π(1 + π<sub>i</sub>) − 1</b></div>
+      <div>Nominal, real e inflación (exacta)<b>(1+g<sub>n</sub>) = (1+g<sub>r</sub>)(1+π)</b></div>
+      <div>Aproximación (solo tasas bajas)<b>g<sub>n</sub> ≈ g<sub>r</sub> + π</b></div>
+      <div>Pérdida de poder adquisitivo<b>1 − 1/(1 + π)</b></div>
+      <div>Población en edad de trabajar<b>PET = PEA + PEI</b></div>
+      <div>PEA<b>ocupados + desocupados</b></div>
+      <div>Tasa de desempleo<b>desocupados / PEA</b></div>
+      <div>Tasa de participación<b>PEA / PET</b></div>
+      <div>Tasa de ocupación<b>ocupados / PET</b></div>
+      <div>Señoreaje<b>S = ΔM / P</b></div>
+      <div>Impuesto inflacionario<b>IT = π × (M/P)</b></div>
+      <div>Ecuación cuantitativa<b>M × V = P × Y</b></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>Errores frecuentes, consolidados<small>Los quince que el curso marca. Repasar la noche antes.</small></h2></div>
+    <div class="errs">
+      <div>Sumar la producción bruta de cada eslabón en lugar del valor agregado.</div>
+      <div>Contar como inversión la compra de acciones o de bienes usados.</div>
+      <div>Contar como gasto de gobierno las transferencias y los bonos.</div>
+      <div>Responder solo "M" cuando un bien importado también entra en C, I o G.</div>
+      <div>Olvidar el ingreso mixto de los cuentapropistas en el enfoque del ingreso.</div>
+      <div>Aplicar porcentajes de reparto sobre la producción en lugar del valor agregado.</div>
+      <div>Confundir el deflactor del PIB con el IPC.</div>
+      <div>Olvidar que en el año base el deflactor vale 100 por definición.</div>
+      <div>Sumar tasas de inflación de períodos sucesivos en lugar de encadenarlas.</div>
+      <div>Usar la aproximación g<sub>n</sub> ≈ g<sub>r</sub> + π con tasas altas.</div>
+      <div>Comparar una proyección con un dato observado sin fecharlos.</div>
+      <div>Comparar series de PIB con distinto año base.</div>
+      <div>Leer la tasa de desempleo sin mirar la participación ni la informalidad.</div>
+      <div>Llamar "hiperinflación" a una inflación alta pero de dos dígitos.</div>
+      <div>Tratar la identidad Y = C + G + I + (X−M) como una teoría del comportamiento.</div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">04</div><h2>Autoevaluación<small>Responde sin mirar el cuaderno; toca la pregunta para comparar con la respuesta.</small></h2></div>
+    <div class="score" id="score"></div>
+    <div id="quiz"></div>
+    <button class="reset" id="rq">Cerrar todas</button>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>Apuntes Parte IX</div></footer>
+  <div class="aguayo"></div>
+</div>
+<script>
+(function(){
+  const Q=[
+  ['¿Por qué un aumento del PIB nominal no implica necesariamente crecimiento real?','El nominal mezcla cantidades y precios. Si los precios suben, el nominal crece aunque se produzca lo mismo o menos. Bolivia 1985: PIB nominal enorme, PIB real menor que en 1980.'],
+  ['¿Por qué la inflación es una pérdida de poder adquisitivo para los tenedores de dinero?','Una cantidad fija de dinero compra menos bienes cuando los precios suben. La pérdida es 1 − 1/(1+π), que no coincide con π.'],
+  ['¿Por qué el impuesto inflacionario deja de ser efectivo cuando la inflación se vuelve extrema?','IT = π × (M/P). Al subir π, la gente reduce sus saldos reales; a partir de cierto punto la base cae más rápido que lo que sube la tasa y la recaudación disminuye. Curva de Laffer inflacionaria.'],
+  ['¿Qué ocurre con la demanda de moneda nacional cuando se espera inflación muy elevada?','Cae: mantener moneda nacional se vuelve costoso. Los agentes buscan bienes, divisas o activos indexados.'],
+  ['¿Cómo se relacionan hiperinflación y dolarización?','La inflación extrema destruye la confianza en la moneda; la gente la sustituye por divisas, primero como reserva de valor y luego como unidad de cuenta y medio de pago.'],
+  ['¿Por qué la tasa de desempleo no basta para evaluar el mercado laboral?','Solo cuenta a quien busca activamente. Deja fuera a los desalentados (que salen de la PEA), la informalidad, el subempleo y la baja productividad. Hay que mirar participación y ocupación.'],
+  ['¿Qué representan las curvas IS y LM?','IS: combinaciones de Y e i que equilibran el mercado de bienes (pendiente negativa). LM: combinaciones que equilibran el mercado de dinero (pendiente positiva). Su cruce fija Y e i de corto plazo.'],
+  ['¿Qué función cumplen las cuotas y los DEG dentro del FMI?','Las cuotas son los aportes de los miembros y determinan acceso a recursos, voto y asignación de DEG. El DEG es un activo de reserva internacional valuado con una cesta de monedas.'],
+  ['¿Por qué el PIB mide únicamente bienes finales?','Para no contar dos veces los insumos: el valor del trigo ya está dentro del precio del pan. Equivalentemente, se suma el valor agregado de cada eslabón.'],
+  ['¿Cuál es la diferencia entre PIB y PNB, y cuándo se separan más?','PIB: territorio. PNB: nacionalidad de los factores. Se separan cuando hay muchas remesas (suman al PNB) o muchas utilidades remitidas por empresas extranjeras (restan). PNB = PIB + RNFE.'],
+  ['¿Por qué la identidad Y = C + G + I + (X−M) no puede ser falsa, y por qué eso no la convierte en teoría?','Se cumple por construcción: clasifica todo el gasto final en categorías exhaustivas y excluyentes. No afirma nada sobre comportamiento; una teoría (por ejemplo, que C depende del ingreso disponible) sí puede ser falsa.'],
+  ['Un bien importado suma en C y resta en M. ¿Por qué el efecto neto es cero y qué error se comete al decir que "importar reduce el PIB"?','Bolivia no lo produjo, así que no debe aparecer en su PIB; la resta corrige lo que ya se sumó en C. Decir que importar reduce el PIB confunde una corrección contable con un efecto económico.'],
+  ['Si la inflación mensual es 2% durante doce meses, ¿cuál es la anual? ¿Por qué no es 24%?','(1,02)¹² − 1 = 26,8%. Los precios se componen mes a mes; la suma simple ignora que cada mes se aplica sobre una base mayor.'],
+  ['¿En qué orden pierde el dinero sus tres funciones y qué dice eso sobre la fase de una economía?','Primero reserva de valor, luego unidad de cuenta (precios en dólares), al final medio de pago. Ver carteles en divisa indica que la economía ya perdió las dos primeras.'],
+  ['¿Por qué el IPC y el deflactor pueden divergir en una economía que importa combustibles?','El IPC incluye el diésel importado que consumen los hogares; el deflactor no, porque no es producción interna. Si sube el diésel, el IPC sube y el deflactor no por esa vía.'],
+  ['¿Qué es un ancla nominal y qué ancla reemplazó al tipo de cambio fijo en Bolivia desde junio de 2026?','Es la variable que el banco central se compromete a controlar para disciplinar los precios. Con tipo fijo era el dólar; desde la flotación, el BCB anunció la base monetaria.'],
+  ['¿Por qué una economía puede tener desempleo bajo y un problema laboral grave a la vez?','Sin seguro de desempleo generalizado, casi nadie puede estar desocupado: quien pierde el empleo formal pasa a la informalidad o al cuentapropismo. El problema aparece como subempleo y baja productividad, no como desempleo.'],
+  ['Un titular dice que la economía creció 15%. ¿Qué cuatro preguntas le harías antes de aceptar la cifra?','¿Nominal o real? ¿Observado o proyección? ¿Qué año base? ¿Preliminar o definitivo? Y además: ¿en qué moneda y frente a qué base de comparación?']];
+  const q=document.getElementById('quiz');
+  q.innerHTML=Q.map((x,i)=>`<div class="quiz"><div class="q"><span>${i+1}. ${x[0]}</span></div><div class="a">${x[1]}</div></div>`).join('');
+  const upd=()=>{const o=q.querySelectorAll('.quiz.open').length;document.getElementById('score').textContent=`${o} de ${Q.length} respuestas abiertas`;};
+  q.querySelectorAll('.quiz').forEach(el=>el.querySelector('.q').addEventListener('click',()=>{el.classList.toggle('open');upd();}));
+  document.getElementById('rq').addEventListener('click',()=>{q.querySelectorAll('.quiz').forEach(el=>el.classList.remove('open'));upd();});
+  upd();
+})();
+</script>
+</body>
+</html>

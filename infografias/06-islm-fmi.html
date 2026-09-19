@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte VI · IS-LM y el FMI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* IS-LM */
+  .islm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);grid-template-areas:"q1 q2" "q3 q4";gap:12px}
+  .islm .q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:clamp(14px,2.5vw,20px);min-width:0}
+  .islm .q1{grid-area:q1}.islm .q2{grid-area:q2}.islm .q3{grid-area:q3}.islm .q4{grid-area:q4}
+  .islm .q2{display:flex;flex-direction:column;justify-content:center}
+  @media (max-width:720px){.islm{grid-template-columns:1fr;grid-template-areas:"q1" "q2" "q3" "q4"}}
+  .islm canvas{width:100%;height:auto;display:block;background:var(--bg);border-radius:8px;border:1px solid var(--line)}
+  .islm .ctl{grid-template-columns:64px 1fr 62px}
+  .leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--muted)}
+  .leg span::before{content:"";display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px;background:var(--c)}
+  .leg span.dash::before{background:repeating-linear-gradient(90deg,var(--c) 0 4px,transparent 4px 7px)}
+  .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .kpi div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  .kpi small{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .kpi b{font-family:'JetBrains Mono';font-size:20px;font-weight:600}
+  .kpi b em{font-style:normal;font-size:12px;margin-left:6px}
+  .kpi b em.up{color:var(--ok)} .kpi b em.dn{color:var(--bad)}
+  .kpi input{width:76px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--text);font:600 20px 'JetBrains Mono';padding:0 0 2px;outline:0}
+  .kpi input:focus{border-bottom-color:var(--acento)}
+  .grp{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:6px 0 8px;padding-top:8px;border-top:1px solid var(--line)}
+  .grp:first-child{border:0;padding:0;margin-top:0}
+  .cases2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+  .cases2 button{background:var(--bg);border:1px solid var(--line);color:var(--text);font:600 12.5px 'Manrope';padding:10px 10px;border-radius:8px;cursor:pointer;text-align:left;line-height:1.3}
+  .cases2 button.on{border-color:var(--acento);background:linear-gradient(180deg,rgba(232,35,107,.16),transparent)}
+  .steps{margin-top:0}
+  .steps h5{font-size:14px;font-weight:700;margin-bottom:8px}
+  .steps ol{padding-left:20px;font-size:13px;line-height:1.55;color:var(--muted)}
+  .steps li{margin-bottom:5px}
+  .steps li b{color:var(--text);font-weight:600}
+  .steps .res{margin-top:10px;font-size:13px;line-height:1.5;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,197,61,.35);background:rgba(255,197,61,.06);color:var(--muted)}
+  .steps .res b{color:var(--warn)}
+  .eq{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:8px;font-family:'JetBrains Mono';font-size:11px;color:var(--dim)}
+
+  .cases2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+  .cases2 button{background:var(--bg);border:1px solid var(--line);color:var(--text);font:600 12.5px 'Manrope';padding:10px 10px;border-radius:8px;cursor:pointer;text-align:left;line-height:1.3}
+  .cases2 button.on{border-color:var(--acento);background:linear-gradient(180deg,rgba(232,35,107,.16),transparent)}
+  .steps{margin-top:0}
+  .steps h5{font-size:14px;font-weight:700;margin-bottom:8px}
+  .steps ol{padding-left:20px;font-size:13px;line-height:1.55;color:var(--muted)}
+  .steps li{margin-bottom:5px}
+  .steps li b{color:var(--text);font-weight:600}
+  .steps .res{margin-top:10px;font-size:13px;line-height:1.5;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,197,61,.35);background:rgba(255,197,61,.06);color:var(--muted)}
+  .steps .res b{color:var(--warn)}
+  .eq{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:8px;font-family:'JetBrains Mono';font-size:11px;color:var(--dim)}
+  .kpi input{width:76px;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--text);font:600 20px 'JetBrains Mono';padding:0 0 2px;outline:0}
+  .kpi input:focus{border-bottom-color:var(--acento)}
+  .grp{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:6px 0 8px;padding-top:8px;border-top:1px solid var(--line)}
+  .grp:first-child{border:0;padding:0;margin-top:0}
+  .steps{margin-top:0}
+  .steps h5{font-size:14px;font-weight:700;margin-bottom:8px}
+  .steps ol{padding-left:20px;font-size:13px;line-height:1.55;color:var(--muted)}
+  .steps li{margin-bottom:5px}.steps li b{color:var(--text);font-weight:600}
+  .steps .res{margin-top:10px;font-size:13px;line-height:1.5;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,197,61,.35);background:rgba(255,197,61,.06);color:var(--muted)}
+  .steps .res b{color:var(--warn)}
+  .curves{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .curves .card{border-left:3px solid var(--acento)}.curves .card:nth-child(2){border-left-color:var(--azul)}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Parte VI</div>
+      <h1>IS-LM y el Fondo Monetario Internacional</h1>
+      <p class="sub">Una herramienta para analizar juntos el mercado de bienes y el mercado de dinero en el corto plazo, y las instituciones que sostienen las reservas de un país.</p>
+    </div>
+    <div class="meta"><b>U V–VI</b>Material preliminar</div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>Las dos curvas<small>La intersección determina, bajo los supuestos del modelo, un nivel de producción y una tasa de interés de equilibrio. Supuesto crítico: precios fijos. Por eso es una herramienta de corto plazo y no sirve para analizar inflación.</small></h2></div>
+    <div class="curves">
+      <div class="card"><h4>IS · Mercado de bienes</h4><p>Combinaciones de producción y tasa de interés compatibles con el equilibrio del mercado de bienes.</p><p style="margin-top:8px"><b>Pendiente negativa:</b> una tasa más baja abarata el crédito, estimula la inversión y eleva la demanda agregada. Menor i, mayor Y.</p><p style="margin-top:8px"><b>La desplaza:</b> la política fiscal (más G, menos T) y los choques de demanda.</p></div>
+      <div class="card"><h4>LM · Mercado de dinero</h4><p>Combinaciones de producción y tasa de interés compatibles con el equilibrio del mercado de dinero.</p><p style="margin-top:8px"><b>Pendiente positiva:</b> con oferta monetaria dada, más producción eleva la demanda de dinero por transacciones; para equilibrar, la tasa debe subir. Mayor Y, mayor i.</p><p style="margin-top:8px"><b>La desplaza:</b> la política monetaria (M) y los cambios en la demanda de dinero.</p></div>
+    </div>
+    <div class="callout bad"><b>Fuente número uno de errores:</b> confundir un desplazamiento de la curva con un movimiento a lo largo de la curva. Solo la política fiscal desplaza la IS; solo la monetaria (o la demanda de dinero) desplaza la LM. Todo lo demás es moverse sobre la curva.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Simulador IS-LM: desplazamiento y pendiente<small>La IS recoge el equilibrio del mercado de bienes; la LM, el del mercado de dinero. Su cruce fija producción (Y) y tasa de interés (i). Las políticas desplazan las curvas; los parámetros de comportamiento cambian su inclinación. E₀ es el equilibrio inicial y E₁ el nuevo.</small></h2></div>
+    <div class="islm">
+      <div class="q q1">
+        <div class="grp">Política y choques (desplazan)</div>
+        <div class="ctl"><label for="kG">G<small>Gasto público</small></label><input type="range" id="kG" min="-30" max="30" step="1" value="0"><output id="oG2">0</output></div>
+        <div class="ctl"><label for="kT">T<small>Impuestos</small></label><input type="range" id="kT" min="-30" max="30" step="1" value="0"><output id="oT2">0</output></div>
+        <div class="ctl"><label for="kC">C₀<small>Consumo autónomo</small></label><input type="range" id="kC" min="-30" max="30" step="1" value="0"><output id="oC2">0</output></div>
+        <div class="ctl"><label for="kM">M<small>Oferta monetaria</small></label><input type="range" id="kM" min="-30" max="30" step="1" value="0"><output id="oM2">0</output></div>
+        <div class="ctl"><label for="kL">L₀<small>Demanda de efectivo</small></label><input type="range" id="kL" min="-30" max="30" step="1" value="0"><output id="oL2">0</output></div>
+        <div class="grp">Parámetros (inclinan)</div>
+        <div class="ctl"><label for="pc">c<small>Propensión a consumir</small></label><input type="range" id="pc" min="0.5" max="0.95" step="0.01" value="0.75"><output id="opc">0,75</output></div>
+        <div class="ctl"><label for="pb">b<small>Inversión ante i</small></label><input type="range" id="pb" min="1" max="15" step="0.5" value="5"><output id="opb">5</output></div>
+        <div class="ctl"><label for="pk">k<small>Dinero ante Y</small></label><input type="range" id="pk" min="0.2" max="1.5" step="0.05" value="0.6"><output id="opk">0,6</output></div>
+        <div class="ctl"><label for="ph">h<small>Dinero ante i</small></label><input type="range" id="ph" min="1" max="20" step="0.5" value="8"><output id="oph">8</output></div>
+      </div>
+      <div class="q q2">
+        <canvas id="cv"></canvas>
+        <div class="leg"><span style="--c:#E8236B">IS</span><span style="--c:#4FB0FF">LM</span><span class="dash" style="--c:#6B6A64">posición inicial</span><span style="--c:#FFC53D">E₀ / E₁</span></div>
+        <div class="eq"><span>IS: i = (C₀ + I₀ + G − c·T − (1−c)·Y) / b</span><span>LM: i = (k·Y + L₀ − M) / h</span></div>
+      </div>
+      <div class="q q3">
+        <div class="grp">Casos tipo</div>
+        <div class="cases2">
+          <button data-case="m_up">Banco central aumenta M ↑</button>
+          <button data-case="m_dn">Banco central reduce M ↓</button>
+          <button data-case="g_up">Gobierno sube el gasto G ↑</button>
+          <button data-case="t_dn">Recorte de impuestos T ↓</button>
+          <button data-case="c_dn">Cae la confianza C₀ ↓</button>
+          <button data-case="mix">Mix fiscal + monetario</button>
+          <button data-case="fraud">Fraude en tarjetas: más efectivo</button>
+          <button data-case="i_dn">BCB baja la tasa de interés</button>
+        </div>
+        <button class="reset" id="reset2">Volver al equilibrio inicial</button>
+        <div class="kpi">
+          <div><small>Producción Y · editable</small><b><input id="inY" type="number" step="1"><em id="aY"></em></b></div>
+          <div><small>Tasa i (%) · editable</small><b><input id="inI" type="number" step="0.1"><em id="aI"></em></b></div>
+        </div>
+      </div>
+      <div class="q q4">
+        <div class="grp">Qué está pasando</div>
+        <div id="note2"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>FMI: cuotas y Derechos Especiales de Giro<small>Creado en el orden de Bretton Woods, opera desde mediados de los años 40. Promueve la estabilidad monetaria internacional y apoya a países con problemas de balanza de pagos.</small></h2></div>
+    <div class="grid wide">
+      <div class="card"><h4>Cuotas</h4><p>Aportes de los países miembros. Determinan el acceso a recursos, la participación en las decisiones y la asignación de DEG.</p></div>
+      <div class="card"><h4>Derechos Especiales de Giro (DEG / SDR)</h4><p>Activo de reserva internacional creado por el FMI. No es una moneda de uso cotidiano; su valor se determina con una cesta de monedas. Se intercambian entre países para fortalecer reservas o atender necesidades de liquidez.</p></div>
+    </div>
+    <div class="callout" style="margin-top:12px"><b>Referencia de clase: USD 1,41 por DEG.</b> Fluctúa a diario según las monedas de la cesta. Es un orden de magnitud, no una constante; en un examen el enunciado debería dar el tipo de cambio del día.</div>
+    <div class="callout info"><b>Por qué aparece en un curso de macro boliviana.</b> La posición de reserva en el FMI y las tenencias de DEG figuran entre los activos que el BCB reporta como reservas internacionales, junto con divisas y oro. Con escasez de divisas, la composición de las reservas (cuánto es oro, cuánto divisa líquida, cuánto DEG) pasa a ser el centro del debate de política económica.</div>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>Apuntes secciones 8 y 9 · Blanchard cap. 5 · Mankiw cap. 11–12</div></footer>
+  <div class="aguayo"></div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  /* ---------- IS-LM ---------- */
+  (function(){
+    const cv=$('cv'), ctx=cv.getContext('2d');
+    const P={G:'kG',T:'kT',C:'kC',M:'kM',L:'kL',c:'pc',b:'pb',k:'pk',h:'ph'};
+    const DEF={G:0,T:0,C:0,M:0,L:0,c:0.75,b:5,k:0.6,h:8};
+    const Y0=100,i0=5;
+    const xr=[40,160], yr=[0,12];
+    let W=640,H=460,pad={l:56,t:22,r:22,b:46};
+    const X=y=>pad.l+(y-xr[0])/(xr[1]-xr[0])*(W-pad.l-pad.r);
+    const Yp=i=>H-pad.b-(i-yr[0])/(yr[1]-yr[0])*(H-pad.t-pad.b);
+    const fmt=(v,d)=>v.toFixed(d).replace('.',',');
+    function size(){const r=cv.parentElement.getBoundingClientRect();W=Math.max(300,Math.floor(r.width));H=Math.round(W*0.72);const dpr=window.devicePixelRatio||1;cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);pad.l=W<420?44:56;}
+    function get(){const v={};for(const q in P)v[q]=+$(P[q]).value;return v;}
+    function model(v){
+      // Equilibrio inicial calibrado para que con parámetros actuales pase por (Y0,i0)
+      const A0=v.b*i0+(1-v.c)*Y0;            // C0+I0+G0-cT0 implícito
+      const M0=v.k*Y0-v.h*i0;                // M0/P implícito
+      const A=A0+v.G-v.c*v.T+v.C, M=M0+v.M-v.L;
+      const IS=y=>(A-(1-v.c)*y)/v.b, LM=y=>(v.k*y-M)/v.h;
+      const IS0=y=>(A0-(1-v.c)*y)/v.b, LM0=y=>(v.k*y-M0)/v.h;
+      const ye=(A*v.h+v.b*M)/((1-v.c)*v.h+v.b*v.k), ie=IS(ye);
+      return {IS,LM,IS0,LM0,ye,ie,A,A0,M,M0};
+    }
+    function clip(fn){const pts=[];for(let y=xr[0];y<=xr[1];y+=1){const i=fn(y);if(i>=yr[0]-0.5&&i<=yr[1]+0.5)pts.push([X(y),Yp(Math.min(yr[1],Math.max(yr[0],i)))]);}return pts;}
+    function line(fn,col,dash,w){const pts=clip(fn);if(pts.length<2)return;ctx.beginPath();ctx.setLineDash(dash?[6,6]:[]);ctx.lineWidth=w;ctx.strokeStyle=col;pts.forEach((p,j)=>j?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.stroke();ctx.setLineDash([]);}
+    function axes(){
+      ctx.clearRect(0,0,W,H);
+      ctx.font='500 11px JetBrains Mono';ctx.fillStyle='#9A9890';ctx.strokeStyle='#26262E';ctx.lineWidth=1;
+      for(let i=yr[0];i<=yr[1];i+=2){const y=Yp(i);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.textAlign='right';ctx.fillText(i+'%',pad.l-8,y+4);}
+      for(let y=xr[0];y<=xr[1];y+=20){const x=X(y);ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,H-pad.b);ctx.stroke();ctx.textAlign='center';ctx.fillText(y,x,H-pad.b+16);}
+      ctx.strokeStyle='#8A8880';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,H-pad.b);ctx.lineTo(W-pad.r,H-pad.b);ctx.stroke();
+      ctx.fillStyle='#ECEAE4';ctx.font='600 12px Manrope';ctx.textAlign='right';ctx.fillText('Y (producción)',W-pad.r,H-pad.b+34);
+      ctx.textAlign='left';ctx.fillText('i (tasa de interés)',pad.l+6,pad.t-6);
+    }
+    function point(x,y,label,sub,fill,dim){
+      ctx.setLineDash([3,4]);ctx.strokeStyle=dim?'#4A4A52':'#FFC53D';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,H-pad.b);ctx.moveTo(x,y);ctx.lineTo(pad.l,y);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle=fill;ctx.beginPath();ctx.arc(x,y,dim?5:7,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#0D0D10';ctx.lineWidth=3;ctx.stroke();
+      ctx.font='700 13px Manrope';ctx.textAlign='left';ctx.fillStyle=dim?'#9A9890':'#ECEAE4';
+      const tx=Math.min(x+11,W-pad.r-96), ty=y-10;
+      ctx.fillText(label,tx,ty);ctx.font='500 11px JetBrains Mono';ctx.fillStyle=dim?'#6B6A64':'#FFC53D';ctx.fillText(sub,tx,ty+14);
+    }
+    let activeCase=null;
+    const res=(R)=>'<div class="res"><b>Resultado:</b> Y pasa de 100 a '+R.Y.toFixed(0)+' ('+(R.dY>0?'+':'')+R.dY.toFixed(0)+') · i pasa de 5,0% a '+fmt(R.i,1)+'% ('+(R.di>0?'+':'')+fmt(R.di,1)+' pp).</div>';
+    const CASES={
+      m_up:{set:{M:20},render:(R,v)=>'<div class="steps"><h5>El banco central aumenta la oferta monetaria (M ↑)</h5><ol>'+
+        '<li><b>El BCB inyecta liquidez</b>: compra títulos o reduce el encaje. Hay más dinero en circulación (M sube +'+v.M+').</li>'+
+        '<li><b>Exceso de dinero al nivel de i vigente.</b> Con el mismo ingreso Y, la gente tiene más saldos de los que desea mantener y compra bonos.</li>'+
+        '<li><b>Sube el precio de los bonos, baja la tasa de interés.</b> Para cada nivel de Y ahora se requiere una i menor para equilibrar el mercado de dinero.</li>'+
+        '<li><b>La LM se desplaza a la derecha</b> (hacia abajo). La IS no se mueve: nada cambió en el mercado de bienes.</li>'+
+        '<li><b>Movimiento a lo largo de la IS</b>: con i más baja la inversión sube, y con ella la demanda y la producción, hasta el nuevo cruce E₁.</li></ol>'+res(R)+'</div>'},
+      m_dn:{set:{M:-20},render:(R,v)=>'<div class="steps"><h5>El banco central reduce la oferta monetaria (M ↓)</h5><ol>'+
+        '<li><b>El BCB retira liquidez</b>: vende títulos, sube el encaje o fija la base monetaria como ancla (Bolivia, 2026).</li>'+
+        '<li><b>Escasez de dinero al nivel de i vigente.</b> Los agentes venden bonos para recomponer saldos.</li>'+
+        '<li><b>Cae el precio de los bonos, sube la tasa de interés.</b> Para cada Y se requiere una i mayor para equilibrar el mercado de dinero.</li>'+
+        '<li><b>La LM se desplaza a la izquierda</b> (hacia arriba). La IS no se mueve.</li>'+
+        '<li><b>Movimiento a lo largo de la IS</b>: i más alta frena la inversión y la producción cae. Es el costo real de estabilizar precios con contracción monetaria.</li></ol>'+res(R)+'</div>'},
+      g_up:{set:{G:20},render:(R,v)=>'<div class="steps"><h5>El gobierno aumenta el gasto público (G ↑)</h5><ol>'+
+        '<li><b>Más demanda de bienes</b>: el Estado compra más (obras, salud). Para cada i, la producción de equilibrio del mercado de bienes es mayor.</li>'+
+        '<li><b>La IS se desplaza a la derecha.</b> El desplazamiento es G × multiplicador = '+v.G+' × 1/(1−c) = '+(v.G/(1-v.c)).toFixed(0)+' si i no cambiara.</li>'+
+        '<li><b>Pero i sí cambia:</b> al subir Y, sube la demanda de dinero por transacciones. Con M fija, la tasa de interés sube para equilibrar el mercado de dinero.</li>'+
+        '<li><b>Movimiento a lo largo de la LM.</b> La i más alta reduce la inversión privada: <b>crowding out</b>.</li>'+
+        '<li><b>Resultado neto:</b> Y sube, pero menos que el multiplicador simple ('+(v.G/(1-v.c)).toFixed(0)+'). Cuanto más plana la LM (h grande), menor el crowding out.</li></ol>'+res(R)+'</div>'},
+      t_dn:{set:{T:-20},render:(R,v)=>'<div class="steps"><h5>Recorte de impuestos (T ↓)</h5><ol>'+
+        '<li><b>Sube el ingreso disponible</b> de las familias (Y − T).</li>'+
+        '<li><b>Sube el consumo</b>, pero solo en la fracción c = '+fmt(v.c,2)+' del recorte: el resto se ahorra. Por eso el desplazamiento de la IS es c × |ΔT| = '+(v.c*Math.abs(v.T)).toFixed(0)+', menor que un aumento equivalente de G ('+Math.abs(v.T)+').</li>'+
+        '<li><b>La IS se desplaza a la derecha.</b> La LM no se mueve.</li>'+
+        '<li><b>Sube la demanda de dinero</b> con el mayor Y; con M fija, sube i.</li>'+
+        '<li><b>Movimiento a lo largo de la LM</b> hasta E₁: Y sube, i sube, con algo de crowding out.</li></ol>'+res(R)+'</div>'},
+      c_dn:{set:{C:-20},render:(R,v)=>'<div class="steps"><h5>Cae la confianza de los consumidores (C₀ ↓)</h5><ol>'+
+        '<li><b>Choque sin política:</b> por incertidumbre (crisis cambiaria, inflación), las familias gastan menos a cualquier nivel de ingreso.</li>'+
+        '<li><b>Cae la demanda agregada.</b> Para cada i, la producción de equilibrio del mercado de bienes es menor.</li>'+
+        '<li><b>La IS se desplaza a la izquierda.</b> La LM no se mueve.</li>'+
+        '<li><b>Con menor Y cae la demanda de dinero</b> y la tasa de interés baja, lo que amortigua parte de la caída vía inversión.</li>'+
+        '<li><b>Recesión por expectativas:</b> Y cae y i cae. Para compensarla el gobierno puede subir G (caso 3) o el BCB puede bajar i (caso 1).</li></ol>'+res(R)+'</div>'},
+      fraud:{set:{L:20},render:(R,v)=>'<div class="steps"><h5>Fraude en tarjetas de crédito: la gente usa más efectivo</h5><ol>'+
+        '<li><b>Choque a la demanda de dinero, no a la oferta.</b> Por desconfianza en las tarjetas, las familias quieren tener más billetes para el mismo nivel de transacciones (L₀ sube +'+v.L+'). La cantidad de dinero que emite el BCB no cambió.</li>'+
+        '<li><b>Exceso de demanda de dinero al nivel de i vigente.</b> Para conseguir efectivo, los agentes venden bonos.</li>'+
+        '<li><b>Cae el precio de los bonos y sube la tasa de interés.</b> Para cada nivel de Y ahora hace falta una i mayor para equilibrar el mercado de dinero.</li>'+
+        '<li><b>La LM se desplaza a la izquierda</b> (hacia arriba). La IS no se mueve: nada cambió en el mercado de bienes.</li>'+
+        '<li><b>Movimiento a lo largo de la IS:</b> con i más alta cae la inversión y la producción baja hasta E₁. Un cambio en los hábitos de pago termina afectando el empleo.</li>'+
+        '<li><b>Qué puede hacer el BCB:</b> aumentar M en la misma magnitud para acomodar la mayor demanda de efectivo; la LM vuelve a su posición y Y e i quedan como estaban. Combina este caso con "aumenta M ↑" para verlo.</li></ol>'+res(R)+
+        '<div style="margin-top:8px;font-size:11.5px;color:#6B6A64">Fuente: Mankiw, Macroeconomía, cap. 12, problema 4. No está en los apuntes de clase.</div></div>'},
+      i_dn:{set:v=>{const A0=v.b*i0+(1-v.c)*Y0,M0=v.k*Y0-v.h*i0;const A=A0+v.G-v.c*v.T+v.C;const it=i0-1.5;const Y=(A-v.b*it)/(1-v.c);const M=v.k*Y-v.h*it;return {G:v.G,T:v.T,C:v.C,L:v.L,M:Math.round(M-M0+v.L)};},render:(R,v)=>'<div class="steps"><h5>El banco central baja la tasa de interés (meta: 3,5%)</h5><ol>'+
+        '<li><b>La tasa no se baja por decreto.</b> En el IS-LM la tasa de interés es un resultado del mercado de dinero. El BCB la reduce usando su instrumento: la cantidad de dinero.</li>'+
+        '<li><b>El BCB compra bonos (operaciones de mercado abierto)</b> o baja el encaje. Paga con dinero nuevo: M sube (+'+v.M+').</li>'+
+        '<li><b>Al comprar bonos sube su precio y baja su rendimiento:</b> la tasa de interés cae. El BCB sigue comprando hasta que i llega a la meta.</li>'+
+        '<li><b>La LM se desplaza a la derecha</b> exactamente lo necesario para que el cruce con la IS ocurra en i = 3,5%.</li>'+
+        '<li><b>Transmisión al producto:</b> con crédito más barato sube la inversión, luego la demanda y la producción, a lo largo de la IS hasta E₁.</li>'+
+        '<li><b>Versión moderna (Blanchard):</b> si el banco central fija directamente la tasa, la LM se dibuja horizontal en esa i; bajarla es desplazar esa línea hacia abajo. El resultado sobre Y es el mismo.</li></ol>'+res(R)+
+        '<div style="margin-top:8px;font-size:11.5px;color:#6B6A64">Los apuntes (6.1) tratan la tasa como instrumento de política monetaria; aquí se muestra el mecanismo detrás. Escribe otra tasa en el campo "i editable" para fijar una meta distinta.</div></div>'},
+      mix:{set:{G:20,M:20},render:(R,v)=>'<div class="steps"><h5>Mix de políticas: fiscal y monetaria expansivas</h5><ol>'+
+        '<li><b>El gobierno sube G</b>: la IS se desplaza a la derecha (más demanda de bienes).</li>'+
+        '<li><b>Sola, esa expansión subiría i</b> y produciría crowding out (caso 3).</li>'+
+        '<li><b>El BCB acompaña con M ↑</b>: la LM se desplaza a la derecha, ofreciendo el dinero extra que la mayor actividad demanda.</li>'+
+        '<li><b>Las dos presiones sobre i se compensan</b>: la fiscal la empuja arriba, la monetaria abajo.</li>'+
+        '<li><b>Resultado:</b> Y sube con fuerza y i queda casi igual. Es la "acomodación monetaria". Su riesgo, si la economía está cerca del pleno empleo, es la inflación, que el IS-LM con precios fijos no captura.</li></ol>'+res(R)+'</div>'}
+    };
+    let animating=false;
+    function animateTo(target){animating=true;
+      if(typeof target==='function')target=target(get());const start={},end={};for(const q of ['G','T','C','M','L']){start[q]=+$(P[q]).value;end[q]=target[q]||0;}
+      const t0=performance.now(),dur=650;
+      function step(t){const u=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-u,3);for(const q in end)$(P[q]).value=Math.round(start[q]+(end[q]-start[q])*e);draw();if(u<1)requestAnimationFrame(step);else animating=false;}
+      requestAnimationFrame(step);
+    }
+    document.querySelectorAll('.cases2 button').forEach(b=>b.addEventListener('click',()=>{
+      document.querySelectorAll('.cases2 button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+      activeCase=b.dataset.case;animateTo(CASES[activeCase].set);
+    }));
+    let lock=false;
+    function draw(){
+      if(lock)return;
+      const v=get(), m=model(v);
+      const sg=n=>(n>0?'+':'')+n;
+      $('oG2').textContent=sg(v.G);$('oT2').textContent=sg(v.T);$('oC2').textContent=sg(v.C);$('oM2').textContent=sg(v.M);$('oL2').textContent=sg(v.L);
+      $('opc').textContent=fmt(v.c,2);$('opb').textContent=fmt(v.b,1);$('opk').textContent=fmt(v.k,2);$('oph').textContent=fmt(v.h,1);
+      axes();
+      const moved=v.G||v.T||v.C||v.M||v.L;
+      line(m.IS0,'#6B6A64',true,1.5);line(m.LM0,'#6B6A64',true,1.5);
+      line(m.IS,'#E8236B',false,3);line(m.LM,'#4FB0FF',false,3);
+      // labels on curves
+      const lab=(fn,txt,col)=>{const pts=clip(fn);if(!pts.length)return;const p=pts[pts.length-1];ctx.font='800 14px Manrope';ctx.fillStyle=col;ctx.textAlign='right';ctx.fillText(txt,Math.min(p[0],W-pad.r)-4,p[1]-8);};
+      lab(m.IS,'IS','#E8236B');lab(m.LM,'LM','#4FB0FF');
+      if(moved)point(X(Y0),Yp(i0),'E₀','Y='+Y0+'  i='+fmt(i0,1)+'%','#6B6A64',true);
+      point(X(m.ye),Yp(m.ie),moved?'E₁':'E₀','Y='+m.ye.toFixed(0)+'  i='+fmt(m.ie,1)+'%','#FFC53D',false);
+      $('inY').value=m.ye.toFixed(0);$('inI').value=fmt(m.ie,1).replace(',','.');
+      const arrow=(el,d,dec)=>{el.className=Math.abs(d)<0.05?'':(d>0?'up':'dn');el.textContent=Math.abs(d)<0.05?'':(d>0?'▲ +':'▼ ')+fmt(d,dec);};
+      arrow($('aY'),m.ye-Y0,0);arrow($('aI'),m.ie-i0,1);
+      const fis=v.G-v.c*v.T+v.C;
+      const sIS=(1-v.c)/v.b, sLM=v.k/v.h;
+      const pend='<div style="margin-top:10px;font-family:JetBrains Mono,monospace;font-size:11px;color:#6B6A64">Pendiente IS = −(1−c)/b = −'+fmt(sIS,3)+' · Pendiente LM = k/h = '+fmt(sLM,3)+'</div>';
+      const R={Y:m.ye,i:m.ie,dY:m.ye-Y0,di:m.ie-i0};
+      let html='';
+      if(activeCase){html=CASES[activeCase].render(R,v);}
+      else{
+        const n=[];
+        if(fis){const parts=[];if(v.G)parts.push('gasto público '+(v.G>0?'mayor':'menor'));if(v.T)parts.push('impuestos '+(v.T>0?'mayores':'menores'));if(v.C)parts.push('consumo autónomo '+(v.C>0?'mayor':'menor'));
+          n.push('<b style="color:#E8236B">IS se desplaza '+(fis>0?'a la derecha':'a la izquierda')+'</b> ('+parts.join(', ')+'): cambia el mercado de bienes.');}
+        if(v.M)n.push('<b style="color:#4FB0FF">LM se desplaza '+(v.M>0?'a la derecha':'a la izquierda')+'</b> ('+(v.M>0?'expansión':'contracción')+' monetaria): cambia el mercado de dinero.');
+        if(v.L)n.push('<b style="color:#4FB0FF">LM se desplaza '+(v.L>0?'a la izquierda':'a la derecha')+'</b> (la demanda de efectivo '+(v.L>0?'sube':'baja')+' a cualquier nivel de Y): con M fija, la tasa de interés '+(v.L>0?'sube':'baja')+'.');
+        if(!moved)n.push('Equilibrio inicial E₀. Elige un caso tipo para ver el mecanismo paso a paso, o mueve los controles. c, b, k y h cambian la inclinación de las curvas y por tanto cuánto responde Y a cada política.');
+        if(fis>0&&!v.M)n.push('Con M fija, la expansión fiscal sube i y desplaza inversión privada (crowding out).');
+        html='<div class="steps"><ol style="list-style:none;padding:0"><li>'+n.join('</li><li>')+'</li></ol></div>';
+      }
+      $('note2').innerHTML=html+pend;
+    }
+    // Editable targets: Y -> solve G ; i -> solve M
+    function solveY(target){const v=get();const A0=v.b*i0+(1-v.c)*Y0,M0=v.k*Y0-v.h*i0;const M=M0+v.M-v.L;
+      const A=(target*((1-v.c)*v.h+v.b*v.k)-v.b*M)/v.h; const G=A-A0+v.c*v.T-v.C; $('kG').value=Math.max(-30,Math.min(30,Math.round(G)));}
+    function solveI(target){const v=get();const A0=v.b*i0+(1-v.c)*Y0,M0=v.k*Y0-v.h*i0;const A=A0+v.G-v.c*v.T+v.C;
+      // i = (A-(1-c)Y)/b and i=(kY-M)/h -> Y=(A-b*i)/(1-c); M=kY-h*i
+      const Y=(A-v.b*target)/(1-v.c);const M=v.k*Y-v.h*target;$('kM').value=Math.max(-30,Math.min(30,Math.round(M-M0+v.L)));}
+    $('inY').addEventListener('change',e=>{solveY(+e.target.value);draw();});
+    $('inI').addEventListener('change',e=>{solveI(+e.target.value);draw();});
+    Object.values(P).forEach(id=>$(id).addEventListener('input',()=>{if(!animating){activeCase=null;document.querySelectorAll('.cases2 button').forEach(x=>x.classList.remove('on'));}draw();}));
+    $('reset2').addEventListener('click',()=>{activeCase=null;document.querySelectorAll('.cases2 button').forEach(x=>x.classList.remove('on'));for(const q in P)$(P[q]).value=DEF[q];draw();});
+    size();draw();
+    window.addEventListener('resize',()=>{size();draw();});
+  })();
+})();
+</script>
+</body>
+</html>

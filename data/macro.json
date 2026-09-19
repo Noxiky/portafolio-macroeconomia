@@ -1,0 +1,604 @@
+{
+ "actualizado": "2026-09-19T23:15:02+00:00",
+ "fuentes": {
+  "ipc": "INE (IPC base 2016=100), republicado por BCB · https://www.bcb.gob.bo/?q=indicadores_inflacion",
+  "tipo_cambio": "BCB · Tabla de cotizaciones · https://www.bcb.gob.bo/?q=cotizaciones_tc",
+  "ufv": "BCB · Unidad de Fomento de Vivienda · https://www.bcb.gob.bo/?q=servicios/ufv/datos_estadisticos"
+ },
+ "ipc": [
+  {
+   "periodo": "2022-08",
+   "mes": "Agosto",
+   "anio": 2022,
+   "indice": 107.23,
+   "mensual": 0.04,
+   "acumulada": 1.62,
+   "interanual": 1.55
+  },
+  {
+   "periodo": "2022-09",
+   "mes": "Septiembre",
+   "anio": 2022,
+   "indice": 107.38,
+   "mensual": 0.14,
+   "acumulada": 1.76,
+   "interanual": 1.89
+  },
+  {
+   "periodo": "2022-10",
+   "mes": "Octubre",
+   "anio": 2022,
+   "indice": 108.18,
+   "mensual": 0.75,
+   "acumulada": 2.52,
+   "interanual": 2.89
+  },
+  {
+   "periodo": "2022-11",
+   "mes": "Noviembre",
+   "anio": 2022,
+   "indice": 108.69,
+   "mensual": 0.47,
+   "acumulada": 3.0,
+   "interanual": 3.17
+  },
+  {
+   "periodo": "2022-12",
+   "mes": "Diciembre",
+   "anio": 2022,
+   "indice": 108.82,
+   "mensual": 0.12,
+   "acumulada": 3.12,
+   "interanual": 3.12
+  },
+  {
+   "periodo": "2023-01",
+   "mes": "Enero",
+   "anio": 2023,
+   "indice": 109.18,
+   "mensual": 0.33,
+   "acumulada": 0.33,
+   "interanual": 3.14
+  },
+  {
+   "periodo": "2023-02",
+   "mes": "Febrero",
+   "anio": 2023,
+   "indice": 108.7,
+   "mensual": -0.44,
+   "acumulada": -0.11,
+   "interanual": 2.57
+  },
+  {
+   "periodo": "2023-03",
+   "mes": "Marzo",
+   "anio": 2023,
+   "indice": 108.61,
+   "mensual": -0.08,
+   "acumulada": -0.19,
+   "interanual": 2.53
+  },
+  {
+   "periodo": "2023-04",
+   "mes": "Abril",
+   "anio": 2023,
+   "indice": 108.81,
+   "mensual": 0.18,
+   "acumulada": -0.003,
+   "interanual": 2.7
+  },
+  {
+   "periodo": "2023-05",
+   "mes": "Mayo",
+   "anio": 2023,
+   "indice": 109.44,
+   "mensual": 0.57,
+   "acumulada": 0.57,
+   "interanual": 2.9
+  },
+  {
+   "periodo": "2023-06",
+   "mes": "Junio",
+   "anio": 2023,
+   "indice": 109.68,
+   "mensual": 0.22,
+   "acumulada": 0.79,
+   "interanual": 2.73
+  },
+  {
+   "periodo": "2023-07",
+   "mes": "Julio",
+   "anio": 2023,
+   "indice": 110.08,
+   "mensual": 0.37,
+   "acumulada": 1.16,
+   "interanual": 2.7
+  },
+  {
+   "periodo": "2023-08",
+   "mes": "Agosto",
+   "anio": 2023,
+   "indice": 110.51,
+   "mensual": 0.39,
+   "acumulada": 1.55,
+   "interanual": 3.06
+  },
+  {
+   "periodo": "2023-09",
+   "mes": "Septiembre",
+   "anio": 2023,
+   "indice": 110.44,
+   "mensual": -0.06,
+   "acumulada": 1.49,
+   "interanual": 2.85
+  },
+  {
+   "periodo": "2023-10",
+   "mes": "Octubre",
+   "anio": 2023,
+   "indice": 110.43,
+   "mensual": -0.01,
+   "acumulada": 1.48,
+   "interanual": 2.08
+  },
+  {
+   "periodo": "2023-12",
+   "mes": "Diciembre",
+   "anio": 2023,
+   "indice": 111.12,
+   "mensual": 0.63,
+   "acumulada": 2.12,
+   "interanual": 2.12
+  },
+  {
+   "periodo": "2024-01",
+   "mes": "Enero",
+   "anio": 2024,
+   "indice": 111.21,
+   "mensual": 0.08,
+   "acumulada": 0.08,
+   "interanual": 1.86
+  },
+  {
+   "periodo": "2024-02",
+   "mes": "Febrero",
+   "anio": 2024,
+   "indice": 111.43,
+   "mensual": 0.2,
+   "acumulada": 0.28,
+   "interanual": 2.52
+  },
+  {
+   "periodo": "2024-03",
+   "mes": "Marzo",
+   "anio": 2024,
+   "indice": 111.94,
+   "mensual": 0.46,
+   "acumulada": 0.74,
+   "interanual": 3.06
+  },
+  {
+   "periodo": "2024-04",
+   "mes": "Abril",
+   "anio": 2024,
+   "indice": 112.58,
+   "mensual": 0.57,
+   "acumulada": 1.31,
+   "interanual": 3.46
+  },
+  {
+   "periodo": "2024-05",
+   "mes": "Mayo",
+   "anio": 2024,
+   "indice": 113.29,
+   "mensual": 0.63,
+   "acumulada": 1.95,
+   "interanual": 3.52
+  },
+  {
+   "periodo": "2024-06",
+   "mes": "Junio",
+   "anio": 2024,
+   "indice": 113.9,
+   "mensual": 0.54,
+   "acumulada": 2.49,
+   "interanual": 3.84
+  },
+  {
+   "periodo": "2024-07",
+   "mes": "Julio",
+   "anio": 2024,
+   "indice": 114.43,
+   "mensual": 0.47,
+   "acumulada": 2.98,
+   "interanual": 3.95
+  },
+  {
+   "periodo": "2024-08",
+   "mes": "Agosto",
+   "anio": 2024,
+   "indice": 116.25,
+   "mensual": 1.58,
+   "acumulada": 4.61,
+   "interanual": 5.19
+  },
+  {
+   "periodo": "2024-09",
+   "mes": "Septiembre",
+   "anio": 2024,
+   "indice": 117.27,
+   "mensual": 0.88,
+   "acumulada": 5.53,
+   "interanual": 6.18
+  },
+  {
+   "periodo": "2024-10",
+   "mes": "Octubre",
+   "anio": 2024,
+   "indice": 119.2,
+   "mensual": 1.64,
+   "acumulada": 7.26,
+   "interanual": 7.94
+  },
+  {
+   "periodo": "2024-11",
+   "mes": "Noviembre",
+   "anio": 2024,
+   "indice": 120.92,
+   "mensual": 1.45,
+   "acumulada": 8.82,
+   "interanual": 9.51
+  },
+  {
+   "periodo": "2024-12",
+   "mes": "Diciembre",
+   "anio": 2024,
+   "indice": 122.21,
+   "mensual": 1.06,
+   "acumulada": 9.97,
+   "interanual": 9.97
+  },
+  {
+   "periodo": "2025-01",
+   "mes": "Enero",
+   "anio": 2025,
+   "indice": 124.19,
+   "mensual": 1.95,
+   "acumulada": 1.95,
+   "interanual": 12.03
+  },
+  {
+   "periodo": "2025-02",
+   "mes": "Febrero",
+   "anio": 2025,
+   "indice": 126.17,
+   "mensual": 1.26,
+   "acumulada": 3.24,
+   "interanual": 13.22
+  },
+  {
+   "periodo": "2025-03",
+   "mes": "Marzo",
+   "anio": 2025,
+   "indice": 128.32,
+   "mensual": 1.71,
+   "acumulada": 5.0,
+   "interanual": 14.63
+  },
+  {
+   "periodo": "2025-04",
+   "mes": "Abril",
+   "anio": 2025,
+   "indice": 129.47,
+   "mensual": 0.9,
+   "acumulada": 5.95,
+   "interanual": 15.01
+  },
+  {
+   "periodo": "2025-05",
+   "mes": "Mayo",
+   "anio": 2025,
+   "indice": 134.2,
+   "mensual": 3.65,
+   "acumulada": 9.81,
+   "interanual": 18.46
+  },
+  {
+   "periodo": "2025-06",
+   "mes": "Junio",
+   "anio": 2025,
+   "indice": 141.19,
+   "mensual": 5.21,
+   "acumulada": 15.53,
+   "interanual": 23.96
+  },
+  {
+   "periodo": "2025-07",
+   "mes": "Julio",
+   "anio": 2025,
+   "indice": 142.88,
+   "mensual": 1.2,
+   "acumulada": 16.92,
+   "interanual": 24.86
+  },
+  {
+   "periodo": "2025-08",
+   "mes": "Agosto",
+   "anio": 2025,
+   "indice": 144.32,
+   "mensual": 1.01,
+   "acumulada": 18.09,
+   "interanual": 24.15
+  },
+  {
+   "periodo": "2025-09",
+   "mes": "Septiembre",
+   "anio": 2025,
+   "indice": 144.61,
+   "mensual": 0.2,
+   "acumulada": 18.33,
+   "interanual": 23.32
+  },
+  {
+   "periodo": "2025-10",
+   "mes": "Octubre",
+   "anio": 2025,
+   "indice": 145.7,
+   "mensual": 0.75,
+   "acumulada": 19.22,
+   "interanual": 22.23
+  },
+  {
+   "periodo": "2025-11",
+   "mes": "Noviembre",
+   "anio": 2025,
+   "indice": 146.27,
+   "mensual": 0.4,
+   "acumulada": 19.69,
+   "interanual": 20.96
+  },
+  {
+   "periodo": "2025-12",
+   "mes": "Diciembre",
+   "anio": 2025,
+   "indice": 147.14,
+   "mensual": 0.59,
+   "acumulada": 20.4,
+   "interanual": 20.4
+  },
+  {
+   "periodo": "2026-01",
+   "mes": "Enero",
+   "anio": 2026,
+   "indice": 149.06,
+   "mensual": 1.31,
+   "acumulada": 1.31,
+   "interanual": 19.64
+  },
+  {
+   "periodo": "2026-02",
+   "mes": "Febrero",
+   "anio": 2026,
+   "indice": 148.14,
+   "mensual": -0.62,
+   "acumulada": 0.68,
+   "interanual": 17.41
+  },
+  {
+   "periodo": "2026-03",
+   "mes": "Marzo",
+   "anio": 2026,
+   "indice": 147.63,
+   "mensual": -0.34,
+   "acumulada": 0.34,
+   "interanual": 15.05
+  },
+  {
+   "periodo": "2026-04",
+   "mes": "Abril",
+   "anio": 2026,
+   "indice": 147.84,
+   "mensual": 0.14,
+   "acumulada": 0.47,
+   "interanual": 14.18
+  },
+  {
+   "periodo": "2026-05",
+   "mes": "Mayo",
+   "anio": 2026,
+   "indice": 150.98,
+   "mensual": 2.13,
+   "acumulada": 2.62,
+   "interanual": 12.51
+  },
+  {
+   "periodo": "2026-06",
+   "mes": "Junio",
+   "anio": 2026,
+   "indice": 154.22,
+   "mensual": 2.15,
+   "acumulada": 4.82,
+   "interanual": 9.23
+  },
+  {
+   "periodo": "2026-07",
+   "mes": "Julio",
+   "anio": 2026,
+   "indice": 149.92,
+   "mensual": -2.79,
+   "acumulada": 1.89,
+   "interanual": 4.93
+  },
+  {
+   "periodo": "2026-08",
+   "mes": "Agosto",
+   "anio": 2026,
+   "indice": null,
+   "mensual": 1.1,
+   "acumulada": 3.01,
+   "interanual": 5.02
+  }
+ ],
+ "tipo_cambio": {
+  "fecha": "2026-09-19",
+  "tabla": "175-26",
+  "oficial_bs_usd": 11.0,
+  "monedas": {
+   "ARS": {
+    "pais": "ARGENTINA",
+    "moneda": "PESO",
+    "bs_por_unidad": 0.00727,
+    "unidades_por_usd": 1514.0254
+   },
+   "AUD": {
+    "pais": "AUSTRALIA",
+    "moneda": "DÓLAR",
+    "bs_por_unidad": 7.83973,
+    "unidades_por_usd": 1.40311
+   },
+   "BRL": {
+    "pais": "BRASIL",
+    "moneda": "REAL",
+    "bs_por_unidad": 2.13858,
+    "unidades_por_usd": 5.1436
+   },
+   "CAD": {
+    "pais": "CANADÁ",
+    "moneda": "DÓLAR",
+    "bs_por_unidad": 7.86276,
+    "unidades_por_usd": 1.399
+   },
+   "CLP": {
+    "pais": "CHILE",
+    "moneda": "PESO",
+    "bs_por_unidad": 0.01146,
+    "unidades_por_usd": 959.47
+   },
+   "COP": {
+    "pais": "COLOMBIA",
+    "moneda": "PESO",
+    "bs_por_unidad": 0.00346,
+    "unidades_por_usd": 3179.47
+   },
+   "KRW": {
+    "pais": "COREA DEL SUR",
+    "moneda": "WON",
+    "bs_por_unidad": 0.00794,
+    "unidades_por_usd": 1385.57
+   },
+   "AED": {
+    "pais": "EMIRATOS ÁRABES",
+    "moneda": "DIRHAM",
+    "bs_por_unidad": 2.99483,
+    "unidades_por_usd": 3.673
+   },
+   "HKD": {
+    "pais": "HONG KONG",
+    "moneda": "DÓLAR",
+    "bs_por_unidad": 1.40211,
+    "unidades_por_usd": 7.8453
+   },
+   "INR": {
+    "pais": "INDIA",
+    "moneda": "RUPIA",
+    "bs_por_unidad": 0.11473,
+    "unidades_por_usd": 95.8763
+   },
+   "JPY": {
+    "pais": "JAPÓN",
+    "moneda": "YEN",
+    "bs_por_unidad": 0.07017,
+    "unidades_por_usd": 156.77
+   },
+   "MXN": {
+    "pais": "MÉXICO",
+    "moneda": "PESO",
+    "bs_por_unidad": 0.63842,
+    "unidades_por_usd": 17.2301
+   },
+   "NOK": {
+    "pais": "NORUEGA",
+    "moneda": "CORONA",
+    "bs_por_unidad": 1.16932,
+    "unidades_por_usd": 9.4072
+   },
+   "PYG": {
+    "pais": "PARAGUAY",
+    "moneda": "GUARANI",
+    "bs_por_unidad": 0.00185,
+    "unidades_por_usd": 5.955
+   },
+   "PEN": {
+    "pais": "PERÚ",
+    "moneda": "NUEVO SOL",
+    "bs_por_unidad": 3.27508,
+    "unidades_por_usd": 3.3587
+   },
+   "GBP": {
+    "pais": "REINO UNIDO",
+    "moneda": "LIBRA",
+    "bs_por_unidad": 14.73563,
+    "unidades_por_usd": 0.74649
+   },
+   "CNY": {
+    "pais": "REP. POPULAR CHINA",
+    "moneda": "YUAN RENMINBI",
+    "bs_por_unidad": 1.64267,
+    "unidades_por_usd": 6.6964
+   },
+   "CNH": {
+    "pais": "REP. POPULAR CHINA OFFSHORE",
+    "moneda": "YUAN RENMINBI OFFSHORE",
+    "bs_por_unidad": 1.64304,
+    "unidades_por_usd": 6.6949
+   },
+   "SEK": {
+    "pais": "SUECIA",
+    "moneda": "CORONA",
+    "bs_por_unidad": 1.11891,
+    "unidades_por_usd": 9.831
+   },
+   "CHF": {
+    "pais": "SUIZA",
+    "moneda": "FRANCO",
+    "bs_por_unidad": 13.38525,
+    "unidades_por_usd": 0.8218
+   },
+   "EUR": {
+    "pais": "UNIÓN EUROPEA",
+    "moneda": "EURO",
+    "bs_por_unidad": 12.63685,
+    "unidades_por_usd": 0.87047
+   },
+   "UYU": {
+    "pais": "URUGUAY",
+    "moneda": "PESO",
+    "bs_por_unidad": 0.27397,
+    "unidades_por_usd": 40.15
+   }
+  }
+ },
+ "ufv": {
+  "fecha": "2026-09-19",
+  "valor": 3.34635
+ },
+ "tc_historico": [
+  {
+   "fecha": "2025-11-30",
+   "oficial": 6.96
+  },
+  {
+   "fecha": "2026-08-20",
+   "oficial": 11.52
+  },
+  {
+   "fecha": "2026-09-03",
+   "oficial": 12.32
+  },
+  {
+   "fecha": "2026-09-19",
+   "oficial": 11.0
+  }
+ ],
+ "errores": []
+}

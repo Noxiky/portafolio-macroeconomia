@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte I · Fundamentos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .vs2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:560px){.vs2{grid-template-columns:1fr}}
+  .vs2 .card h4{font-size:18px;color:var(--acento)}
+  .vs2 .card .row{display:grid;grid-template-columns:110px 1fr;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .vs2 .card .row:last-child{border:0}
+  .vs2 .card .row span:first-child{color:var(--dim);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
+  .vs2 .card .row span:last-child{color:var(--muted)}
+  .q3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .q3 .card{text-align:center;padding:22px 16px}
+  .q3 .sym{font-family:'JetBrains Mono';font-size:34px;font-weight:600;color:var(--acento);line-height:1}
+  .q3 .qq{font-weight:700;font-size:15px;margin:10px 0 4px}
+  .q3 small{color:var(--dim);font-size:11.5px;font-family:'JetBrains Mono'}
+  .plazos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .plazos .card{border-top:3px solid var(--acento)}
+  .plazos .card:nth-child(2){border-top-color:var(--warn)}
+  .plazos .card:nth-child(3){border-top-color:var(--azul)}
+  .plazos .dur{font-family:'JetBrains Mono';font-size:11px;color:var(--dim);margin-bottom:6px}
+  .mapa{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+  .mapa div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12.5px;color:var(--muted);line-height:1.4}
+  .mapa div b{display:block;color:var(--text);font-size:13.5px}
+  .mapa div small{font-family:'JetBrains Mono';color:var(--acento);font-size:10.5px;display:block;margin-bottom:4px}
+  .eval{display:flex;height:34px;border-radius:8px;overflow:hidden;gap:2px;margin-top:12px}
+  .eval div{flex:1;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:11px;background:var(--card);border:1px solid var(--line);color:var(--muted);text-align:center;padding:0 4px}
+  .sup{margin-top:12px}
+  .sup .card{margin-bottom:8px;display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start;cursor:pointer}
+  .sup .card .n{font-family:'JetBrains Mono';color:var(--acento);font-weight:600;font-size:13px;padding-top:2px}
+  .sup .card .why{display:none;margin-top:8px;font-size:13px;color:var(--muted);padding-top:8px;border-top:1px solid var(--line)}
+  .sup .card.open .why{display:block}
+  .sup .card.open{border-color:var(--warn)}
+  .sup .card .why b{color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Parte I</div>
+      <h1>Fundamentos</h1>
+      <p class="sub">Qué estudia la macroeconomía, qué preguntas la organizan, y por qué Bolivia es el caso de estudio del curso.</p>
+    </div>
+    <div class="meta"><b>S 1</b>Sesión · Mankiw cap. 1 · Blanchard cap. 1</div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>Macro y micro: la diferencia es el nivel de agregación<small>La micro pregunta por qué sube el precio de la quinua; la macro pregunta por qué sube el nivel general de precios.</small></h2></div>
+    <div class="vs2">
+      <div class="card"><h4>Microeconomía</h4>
+        <div class="row"><span>Unidad</span><span>Hogares y empresas individuales</span></div>
+        <div class="row"><span>Pregunta</span><span>¿Por qué sube el precio de la quinua?</span></div>
+        <div class="row"><span>Variables</span><span>Precio y cantidad de un bien</span></div>
+        <div class="row"><span>Horizonte</span><span>Decisiones cotidianas</span></div>
+        <div class="row"><span>Estado</span><span>Regulación de mercados específicos</span></div>
+      </div>
+      <div class="card"><h4>Macroeconomía</h4>
+        <div class="row"><span>Unidad</span><span>La economía como un todo (agregados)</span></div>
+        <div class="row"><span>Pregunta</span><span>¿Por qué sube el nivel general de precios?</span></div>
+        <div class="row"><span>Variables</span><span>PIB, inflación, desempleo, tipo de cambio</span></div>
+        <div class="row"><span>Horizonte</span><span>Ciclos y tendencias de años o décadas</span></div>
+        <div class="row"><span>Estado</span><span>Política fiscal, monetaria y cambiaria</span></div>
+      </div>
+    </div>
+    <div class="callout"><b>El agregado no es la suma de las partes.</b> Paradoja del ahorro: si un hogar ahorra más, mejora su posición; si todos ahorran más a la vez, cae el consumo, cae la producción y el ingreso puede bajar tanto que el ahorro total no aumente. Lo cierto para el individuo puede ser falso para el conjunto. Por eso la macroeconomía existe como disciplina separada.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Las tres preguntas centrales, más una<small>Todo el curso gira alrededor de estas variables. Leer un titular como "el Banco Central sube la tasa mientras la inflación se acelera y el desempleo se mantiene bajo" es identificar tres unidades del curso en una línea.</small></h2></div>
+    <div class="q3">
+      <div class="card"><div class="sym">PIB</div><div class="qq">¿Cuánto se produce?</div><small>Unidad I · Sesiones 1–6</small></div>
+      <div class="card"><div class="sym">u</div><div class="qq">¿Cuánta gente trabaja?</div><small>Unidad II · Sesiones 7–9</small></div>
+      <div class="card"><div class="sym">π</div><div class="qq">¿Cuánto suben los precios?</div><small>Unidad III · Sesiones 10–13</small></div>
+      <div class="card"><div class="sym">e</div><div class="qq">¿A qué precio está el dólar?</div><small>Unidad VI · Sesiones 25–29</small></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>De dónde viene la macroeconomía<small>Nace de un fracaso teórico concreto. La secuencia explica por qué el curso separa corto y largo plazo.</small></h2></div>
+    <div class="timeline">
+      <div class="ev"><div class="d">Escuela clásica</div><div class="t">Los mercados se autorregulan</div><p>Ley de Say: toda oferta crea su propia demanda. El desempleo prolongado no debería existir.</p></div>
+      <div class="ev"><div class="d">1929</div><div class="t">Crac bursátil en Estados Unidos</div><p>Comienza la Gran Depresión.</p></div>
+      <div class="ev"><div class="d">1930–1933</div><div class="t">Desempleo superior al 25% en EE. UU.</div><p>La teoría clásica no logra explicarlo ni resolverlo.</p></div>
+      <div class="ev"><div class="d">1936</div><div class="t">Keynes: Teoría general de la ocupación, el interés y el dinero</div><p>La demanda agregada, y no solo la oferta, determina producción y empleo en el corto plazo. Precios y salarios pueden ser rígidos.</p></div>
+      <div class="ev"><div class="d">Posguerra</div><div class="t">Síntesis neoclásica</div><p>Corto plazo keynesiano + largo plazo clásico. Es el andamiaje de este curso.</p></div>
+      <div class="ev"><div class="d">Décadas siguientes</div><div class="t">Monetarismo (Friedman) y debates sobre inflación</div><p>Material de la Unidad III.</p></div>
+      <div class="ev"><div class="d">América Latina</div><div class="t">Estructuralismo de la CEPAL (Prebisch)</div><p>Lectura propia de la región. Sesión 12.</p></div>
+    </div>
+    <div class="callout info"><b>Para el examen.</b> La síntesis neoclásica dice que ambos bandos tenían razón sobre plazos distintos. Keynes describe lo que pasa cuando los precios todavía no se ajustaron; los clásicos, el punto de llegada una vez que sí lo hicieron. Ante "¿la política monetaria afecta la producción?", la respuesta empieza con "¿en qué plazo?".</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">04</div><h2>Corto, mediano y largo plazo<small>Ubicar un fenómeno en el plazo correcto es la primera decisión analítica. La misma medida tiene efectos distintos, y hasta opuestos, según el horizonte.</small></h2></div>
+    <div class="plazos">
+      <div class="card"><div class="dur">DE UN AÑO A OTRO</div><h4>Corto plazo</h4><p>Domina la demanda agregada. Precios rígidos.</p><p style="margin-top:6px"><b>Herramienta:</b> modelo IS-LM (Unidad V).</p></div>
+      <div class="card"><div class="dur">UNA DÉCADA APROX.</div><h4>Mediano plazo</h4><p>Los precios se ajustan.</p><p style="margin-top:6px"><b>Herramienta:</b> desempleo e inflación (Unidades II–III).</p></div>
+      <div class="card"><div class="dur">MEDIO SIGLO O MÁS</div><h4>Largo plazo</h4><p>Domina la oferta: capital, trabajo, tecnología.</p><p style="margin-top:6px"><b>Herramienta:</b> crecimiento, Solow (Unidad IV).</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">05</div><h2>Economía cerrada y economía abierta<small>Es el supuesto que se irá relajando a lo largo del semestre.</small></h2></div>
+    <div class="vs2">
+      <div class="card"><h4>Cerrada</h4>
+        <div class="row"><span>Comercio</span><span>No comercia bienes ni activos con el resto del mundo</span></div>
+        <div class="row"><span>Identidad</span><span class="mono">Y = C + I + G</span></div>
+        <div class="row"><span>Uso</span><span>Simplificación para introducir conceptos (Unidad V)</span></div>
+      </div>
+      <div class="card"><h4>Abierta</h4>
+        <div class="row"><span>Comercio</span><span>Comercia bienes, servicios y activos financieros</span></div>
+        <div class="row"><span>Identidad</span><span class="mono">Y = C + I + G + (X − M)</span></div>
+        <div class="row"><span>Uso</span><span>Introduce tipo de cambio y balanza de pagos (Unidad VI)</span></div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <div class="card"><h4><span>1</span>Comercio</h4><p>Bolivia exporta gas, minerales, soya y quinua; importa combustibles, bienes de capital y tecnología.</p></div>
+      <div class="card"><h4><span>2</span>Capital</h4><p>La inversión extranjera y la deuda externa afectan directamente el producto interno.</p></div>
+      <div class="card"><h4><span>3</span>Tipo de cambio</h4><p>El precio del boliviano frente al dólar transmite los choques externos hacia los precios internos.</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">06</div><h2>Modelos y supuestos<small>"El mapa no es el territorio." Un modelo simplifica para iluminar un mecanismo. Los supuestos no son verdaderos o falsos: son más o menos útiles según la pregunta.</small></h2></div>
+    <p><b>Ejercicio de clase.</b> "Si el BCB reduce la tasa de referencia, el crédito se abarata, la inversión aumenta y el producto crece." Toca cada supuesto escondido para ver por qué puede fallar en Bolivia.</p>
+    <div class="sup">
+      <div class="card"><div class="n">1</div><div>Que la tasa del BCB se transmite a las tasas de los bancos comerciales.<div class="why"><b>Transmisión monetaria.</b> Si los bancos no bajan sus tasas, la cadena se corta en el primer eslabón.</div></div></div>
+      <div class="card"><div class="n">2</div><div>Que existe demanda de crédito reprimida esperando tasas más bajas.<div class="why"><b>Restricción de demanda vs. oferta.</b> Si nadie quiere invertir por otras razones, abaratar el crédito no cambia nada.</div></div></div>
+      <div class="card"><div class="n">3</div><div>Que la inversión responde a la tasa y no a expectativas o incertidumbre.<div class="why"><b>Expectativas.</b> Con incertidumbre alta, la tasa pesa poco en la decisión de invertir.</div></div></div>
+      <div class="card"><div class="n">4</div><div>Que hay capacidad productiva ociosa.<div class="why"><b>Cuestionable en Bolivia 2025–2026.</b> Si la economía está al límite, más demanda genera precios, no cantidades.</div></div></div>
+      <div class="card"><div class="n">5</div><div>Que la economía es cerrada o el tipo de cambio no reacciona.<div class="why"><b>Cuestionable en Bolivia 2025–2026.</b> Con escasez de divisas, bajar tasas puede acelerar la salida de capitales y depreciar la moneda.</div></div></div>
+      <div class="card"><div class="n">6</div><div>Que los precios están dados en el corto plazo.<div class="why"><b>Precios rígidos.</b> Es el supuesto que separa el corto plazo keynesiano del largo plazo clásico.</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">07</div><h2>Bolivia como laboratorio<small>Economía pequeña (tomadora de precios), dependiente de materias primas y del dólar, con episodios extremos que funcionan como laboratorio natural.</small></h2></div>
+    <div class="timeline">
+      <div class="ev"><div class="d">1985</div><div class="t">Hiperinflación</div><p>Pico histórico de inflación. Decreto Supremo 21060 y estabilización.</p></div>
+      <div class="ev"><div class="d">2006–2014</div><div class="t">Bonanza</div><p>Auge de precios internacionales de materias primas: gas y minerales.</p></div>
+      <div class="ev"><div class="d">2014–2015</div><div class="t">Fin del súper-ciclo</div><p>Caída de precios internacionales. Desaceleración.</p></div>
+      <div class="ev"><div class="d">2023–2026</div><div class="t">Crisis cambiaria</div><p>Escasez de dólares, tipo de cambio paralelo y proceso de estabilización.</p></div>
+      <div class="ev"><div class="d">8 nov 2025</div><div class="t">Cambio de gobierno</div><p>Asume Rodrigo Paz.</p></div>
+      <div class="ev"><div class="d">17 dic 2025</div><div class="t">Emergencia económica</div><p>Se retira la subvención a los principales carburantes (D.S. 5503).</p></div>
+      <div class="ev"><div class="d">Cierre 2025</div><div class="t">Inflación acumulada 20,40%</div><p>La más alta desde 1988 (INE, 6 de enero de 2026).</p></div>
+      <div class="ev"><div class="d">26 jun 2026</div><div class="t">Tipo de cambio flexible</div><p>Bolivia abandona el tipo de cambio fijo (RM 245/2026, RD 88/2026 del BCB).</p></div>
+      <div class="ev"><div class="d">Ago 2026</div><div class="t">Primer RIPoM del BCB</div><p>Nuevo esquema de política monetaria: la base monetaria pasa a ser el ancla nominal.</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">08</div><h2>Mapa del curso<small>Siete unidades, treinta sesiones. La evaluación reparte 20% a cada componente.</small></h2></div>
+    <div class="mapa">
+      <div><small>U. I · S 1–6</small><b>Fundamentos y medición</b>PIB, enfoques, nominal/real, IPC</div>
+      <div><small>U. II · S 7–9</small><b>Desempleo</b>Tipos, medición, informalidad</div>
+      <div><small>U. III · S 10–13</small><b>Inflación</b>Tipos, teorías, hiperinflación boliviana</div>
+      <div><small>U. IV · S 14–18</small><b>Crecimiento</b>Solow, capital humano, Romer</div>
+      <div><small>U. V · S 19–24</small><b>IS-LM</b>Curvas IS y LM, política fiscal y monetaria</div>
+      <div><small>U. VI · S 25–29</small><b>Economía abierta</b>Tipo de cambio, Mundell-Fleming, Bolivia</div>
+      <div><small>U. VII · S 30</small><b>Síntesis</b>Trilema de política económica</div>
+    </div>
+    <div class="eval">
+      <div>Talleres e IA · 20%</div><div>Parcial 1 · S 9 · 20%</div><div>Parcial 2 · S 18 · 20%</div><div>Parcial 3 · S 24 · 20%</div><div>Final · S 29–30 · 20%</div>
+    </div>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>Apuntes Sesión 1</div></footer>
+  <div class="aguayo"></div>
+</div>
+<script>
+document.querySelectorAll('.sup .card').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('open')));
+</script>
+</body>
+</html>

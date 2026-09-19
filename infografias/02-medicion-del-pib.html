@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte II · Medición del PIB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .fwrap{container-type:inline-size;margin-bottom:14px}
+  .formula{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:clamp(18px,3vw,28px) clamp(16px,3vw,32px);display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
+  .formula .f{background:none;border:0;padding:0;font-size:clamp(20px,8.2cqw,44px);white-space:normal}
+  .formula .note{margin:0;border-top:1px solid var(--line);padding-top:12px}
+  @container (min-width:760px){.formula{grid-template-columns:minmax(0,1fr) 280px;gap:24px}.formula .f{font-size:clamp(28px,5.4cqw,44px);text-align:left}.formula .note{border-top:0;border-left:2px solid var(--line);padding:0 0 0 14px}}
+  .tres{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .tres .col{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .tres h4{font-weight:700;font-size:15px;margin-bottom:10px;color:var(--acento)}
+  .tres .row{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+  .tres .row:last-child{border:0}.tres .row b{font-family:'JetBrains Mono';color:var(--text);font-weight:500}
+  .conv{margin-top:12px;border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;font-size:14px;color:var(--muted)}
+  .conv b{font-family:'JetBrains Mono';color:var(--text);font-size:20px;margin:0 6px}
+  .pane{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+  .pane h4{font-size:clamp(28px,5vw,34px);font-weight:800;letter-spacing:-.03em;line-height:1}
+  .pane h4 small{display:block;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.14em;color:var(--acento);font-weight:600;margin-bottom:8px}
+  .pane p{margin-top:10px;font-size:13.5px}
+  .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:12px}
+  .case{font-size:12.5px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .case b{font-family:'JetBrains Mono';font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid}
+  .case .si{color:var(--ok);border-color:rgba(61,214,140,.5)}.case .no{color:var(--bad);border-color:rgba(255,77,94,.5)}
+  .quinua{display:flex;height:64px;border-radius:10px;overflow:hidden;gap:3px}
+  .quinua div{display:flex;flex-direction:column;justify-content:center;padding:0 12px;font-weight:800;font-size:18px;background:var(--card);border:1px solid var(--line);line-height:1;min-width:0}
+  .quinua div small{font-weight:500;font-size:11px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .quinua .p{background:linear-gradient(90deg,rgba(232,35,107,.35),rgba(232,35,107,.12));border-color:rgba(232,35,107,.5)}
+  .sim .bar .track{background:var(--bg)}
+  .sim .note b{color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Parte II</div>
+      <h1>Medición del PIB</h1>
+      <p class="sub">Tres formas de llegar al mismo número: qué se compró, qué se produjo y a quién se le pagó.</p>
+    </div>
+    <div class="meta"><b>S 2–4</b>Sesiones · Mankiw cap. 2 · Blanchard cap. 2</div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>Qué es el PIB<small>Valor de mercado de todos los bienes y servicios finales producidos dentro de un país durante un período. Cada parte de la definición cumple una función.</small></h2></div>
+    <div class="grid">
+      <div class="card"><h4><span>A</span>Valor de mercado</h4><p>Los precios permiten sumar bienes distintos: papas, autos, cortes de pelo.</p></div>
+      <div class="card"><h4><span>B</span>Bienes finales</h4><p>Solo lo que llega al usuario final. Así no se cuenta dos veces un insumo.</p></div>
+      <div class="card"><h4><span>C</span>Dentro del país</h4><p>Cuenta el territorio, no la nacionalidad del productor. Por eso es "Interno".</p></div>
+      <div class="card"><h4><span>D</span>En un período</h4><p>Es un flujo, no un stock. Se mide por año, trimestre o mes, y no descuenta depreciación: es bruto.</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Bienes finales y bienes intermedios<small>Un agricultor vende trigo a la panadería El Trigal por Bs 50. La panadería vende el pan por Bs 130.</small></h2></div>
+    <div class="chain">
+      <div class="step"><div class="lbl">Agricultor</div><div class="val">vende trigo · Bs 50 · insumos Bs 0</div><div class="va">Valor agregado<b>Bs 50</b></div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="lbl">Panadería El Trigal</div><div class="val">vende pan · Bs 130 · insumos Bs 50</div><div class="va">Valor agregado<b>Bs 80</b></div></div>
+      <div class="arrow">→</div>
+      <div class="step total"><div class="lbl">Bien final: el pan</div><div class="val">único bien que llega al consumidor</div><div class="va">PIB<b>Bs 130</b></div></div>
+    </div>
+    <div class="verdict">
+      <div class="bad"><b>50 + 130 = 180</b>Incorrecto. El trigo ya está incluido en el precio del pan: doble contabilización.</div>
+      <div class="ok"><b>50 + 80 = 130</b>Correcto. La suma de valores agregados coincide con el valor del bien final.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>Enfoque del gasto<small>Se clasifica todo el gasto final en cuatro categorías que no se superponen. La ecuación es una identidad contable: se cumple siempre.</small></h2></div>
+    <div class="fwrap"><div class="formula">
+      <div class="f">Y = C + I + G + (X <i>−</i> M)</div>
+      <div class="note">Las importaciones se restan porque ya fueron sumadas dentro de C, I o G. Es una corrección contable; importar no reduce el PIB.</div>
+    </div></div>
+    <div class="grid">
+      <div class="card"><h4><span>C</span>Consumo</h4><p>Compras de las familias. Una familia de La Paz compra arroz, ropa y un corte de cabello.</p></div>
+      <div class="card"><h4><span>I</span>Inversión</h4><p>Bienes de capital y variación de existencias. Una minera compra maquinaria nueva.</p></div>
+      <div class="card"><h4><span>G</span>Gobierno</h4><p>Compras de bienes y servicios del Estado. Una posta de salud en Cochabamba. Los bonos no entran.</p></div>
+      <div class="card"><h4><span>X−M</span>Sector externo</h4><p>Gas y minerales a Brasil y Argentina, menos diésel y celulares importados.</p></div>
+    </div>
+    <p style="margin-top:14px"><b>El mismo auto, distinta categoría.</b> Marta lo compra para uso personal: C. Una ferretería para reparto: I. La alcaldía para su flota: G. La categoría depende de quién compra y para qué, no del bien.</p>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">04</div><h2>Simulador: la economía de Catania<small>Valores del caso de clase en pesos latinoamericanos ($L). Mueve cada componente y observa cómo cambian el PIB y las participaciones.</small></h2></div>
+    <div class="sim">
+      <div>
+        <div class="ctl"><label for="sC">C<small>Consumo</small></label><input type="range" id="sC" min="0" max="300000" step="1000" value="168000"><output id="oC"></output></div>
+        <div class="ctl"><label for="sI">I<small>Inversión</small></label><input type="range" id="sI" min="0" max="300000" step="1000" value="62000"><output id="oI"></output></div>
+        <div class="ctl"><label for="sG">G<small>Gobierno</small></label><input type="range" id="sG" min="0" max="300000" step="1000" value="49000"><output id="oG"></output></div>
+        <div class="ctl"><label for="sX">X<small>Exporta</small></label><input type="range" id="sX" min="0" max="300000" step="1000" value="85000"><output id="oX"></output></div>
+        <div class="ctl"><label for="sM">M<small>Importa</small></label><input type="range" id="sM" min="0" max="300000" step="1000" value="91000"><output id="oM"></output></div>
+        <button class="reset" id="reset">Volver a los datos de clase</button>
+      </div>
+      <div class="out">
+        <div class="big"><small>PIB de Catania</small>$L <span id="pib">273.000</span></div>
+        <div class="bars">
+          <div class="bar"><div class="lab">Consumo</div><div class="track"><div class="fill" id="bC"></div></div><div class="v" id="pC"></div></div>
+          <div class="bar"><div class="lab">Inversión</div><div class="track"><div class="fill" id="bI"></div></div><div class="v" id="pI"></div></div>
+          <div class="bar"><div class="lab">Gobierno</div><div class="track"><div class="fill" id="bG"></div></div><div class="v" id="pG"></div></div>
+          <div class="bar" id="rXM"><div class="lab">X − M</div><div class="track"><div class="fill" id="bXM"></div></div><div class="v" id="pXM"></div></div>
+        </div>
+        <div class="note" id="note"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">05</div><h2>Tres enfoques, un solo resultado<small>Gasto, producción e ingreso miden el mismo proceso desde tres ángulos.</small></h2></div>
+    <div class="tres">
+      <div class="col"><h4>Gasto</h4><div class="row"><span>El consumidor paga el pan</span><b>130</b></div></div>
+      <div class="col"><h4>Producción</h4><div class="row"><span>VA agricultor</span><b>50</b></div><div class="row"><span>VA panadería</span><b>80</b></div></div>
+      <div class="col"><h4>Ingreso</h4><div class="row"><span>Ingreso mixto del agricultor</span><b>50</b></div><div class="row"><span>Salario de Ana</span><b>60</b></div><div class="row"><span>Beneficio de Beto</span><b>20</b></div></div>
+    </div>
+    <div class="conv">PIB = <b>Bs 130</b> por los tres caminos. En las cuentas oficiales la diferencia entre enfoques se registra como discrepancia estadística.</div>
+  </section>
+
+
+  <section class="alt">
+    <div class="h2"><div class="num">06</div><h2>PIB y PNB<small>PNB = PIB + renta neta de factores del exterior. En el sistema de cuentas actual el PNB se llama Ingreso Nacional Bruto (INB). Toca cada uno.</small></h2></div>
+    <div class="tabs"><button class="on" data-t="pib">PIB · territorio</button><button data-t="pnb">PNB · nacionalidad</button></div>
+    <div class="pane on" id="t-pib">
+      <h4><small>CRITERIO: TERRITORIO</small>PIB</h4>
+      <p>Producción realizada dentro de las fronteras del país, sin importar la nacionalidad de quien produce.</p>
+      <div class="cases">
+        <div class="case">Minera extranjera en Potosí<b class="si">cuenta</b></div>
+        <div class="case">Ingeniero boliviano en Buenos Aires<b class="no">no cuenta</b></div>
+      </div>
+    </div>
+    <div class="pane" id="t-pnb">
+      <h4><small>CRITERIO: NACIONALIDAD</small>PNB</h4>
+      <p>Producción de los factores de propiedad nacional, sin importar en qué país se realice.</p>
+      <div class="cases">
+        <div class="case">Minera extranjera en Potosí<b class="no">no cuenta</b></div>
+        <div class="case">Ingeniero boliviano en Buenos Aires<b class="si">cuenta</b></div>
+      </div>
+    </div>
+    <p style="margin-top:12px">En Bolivia dos flujos empujan en direcciones opuestas: las remesas suman; las utilidades remitidas por empresas extranjeras de minería e hidrocarburos restan.</p>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">07</div><h2>Cadena de valor de la quinua<small>Cifras ilustrativas por quintal. Participación de cada eslabón en el valor final de exportación ($500).</small></h2></div>
+    <div class="quinua">
+      <div class="p" style="flex:40">40%<small>Productor · VA $200</small></div>
+      <div style="flex:30">30%<small>Beneficiado · VA $150</small></div>
+      <div style="flex:30">30%<small>Exportador · VA $150</small></div>
+    </div>
+    <div class="callout"><b>El productor primario capta el 40%.</b> El 60% restante se genera en procesamiento y comercialización, etapas que muchas veces ocurren fuera del país. Si el beneficiado y el empaque se hicieran en Bolivia, ese valor agregado se registraría como producción interna.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">08</div><h2>Errores frecuentes<small>Los que el curso marca de forma explícita.</small></h2></div>
+    <div class="err">
+      <div><b>Comprar acciones no es inversión</b>Es un activo financiero ya existente, no producción nueva.</div>
+      <div><b>Un bono no es gasto de gobierno</b>El Estado no compró un bien ni un servicio. Entra al PIB después, si el receptor lo gasta.</div>
+      <div><b>Una casa usada no se cuenta de nuevo</b>Se contó como inversión cuando se construyó. Sí cuenta la comisión del corredor.</div>
+      <div><b>Un bien importado se registra dos veces</b>Suma en C, I o G y resta en M. Responder solo "M" está incompleto. Efecto neto: cero.</div>
+      <div><b>No sumar producción bruta</b>Sumar los eslabones completos cuenta la lana tres veces. Se suma solo el valor agregado.</div>
+      <div><b>Porcentajes sobre el valor agregado</b>El reparto 60/40 se aplica sobre el VA de la fábrica ($500), no sobre su producción ($900).</div>
+    </div>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>Apuntes Sesiones 2–4</div></footer>
+  <div class="aguayo"></div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const fmt=n=>Math.round(n).toLocaleString('es-BO');
+  const pct=(a,b)=>b?((a/b)*100).toFixed(1).replace('.',',')+'%':'—';
+  const base={C:168000,I:62000,G:49000,X:85000,M:91000};
+  const ids=['C','I','G','X','M'];
+  function update(){
+    const v={};ids.forEach(k=>{v[k]=+$('s'+k).value;$('o'+k).textContent=fmt(v[k]);});
+    const xm=v.X-v.M, y=v.C+v.I+v.G+xm;
+    $('pib').textContent=fmt(y);
+    const maxw=Math.max(v.C,v.I,v.G,Math.abs(xm),1);
+    [['C',v.C],['I',v.I],['G',v.G]].forEach(([k,val])=>{$('b'+k).style.width=(val/maxw*100)+'%';$('p'+k).textContent=pct(val,y);});
+    $('bXM').style.width=(Math.abs(xm)/maxw*100)+'%';
+    $('bXM').classList.toggle('neg',xm<0);$('rXM').classList.toggle('neg',xm<0);
+    $('pXM').textContent=(xm<0?'−':'')+pct(Math.abs(xm),y);
+    let n;
+    if(xm<0) n='Exportaciones netas negativas: Catania importa más de lo que exporta. Un salto de M no reduce el PIB por sí mismo; la resta corrige lo que ya se contó en C, I o G.';
+    else if(xm===0) n='Balanza comercial en equilibrio: el sector externo no aporta ni resta al PIB.';
+    else n='Superávit comercial: las exportaciones netas suman al PIB.';
+    const share=v.C/y;
+    if(share>0.75) n+=' <b>El consumo supera el 75% del PIB:</b> una economía con muy poca inversión compromete su capacidad productiva futura.';
+    $('note').innerHTML=n;
+  }
+  ids.forEach(k=>$('s'+k).addEventListener('input',update));
+  $('reset').addEventListener('click',()=>{ids.forEach(k=>$('s'+k).value=base[k]);update();});
+  update();
+
+
+  document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.pane').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');$('t-'+b.dataset.t).classList.add('on');
+  }));
+})();
+</script>
+</body>
+</html>

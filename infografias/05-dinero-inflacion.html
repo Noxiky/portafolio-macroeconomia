@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte V · Dinero, inflación y dolarización</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .mech{counter-reset:m}
+  .mech .card{display:grid;grid-template-columns:30px 1fr;gap:10px;margin-bottom:8px;align-items:start}
+  .mech .card::before{counter-increment:m;content:counter(m);font-family:'JetBrains Mono';color:var(--acento);font-weight:600;font-size:13px;padding-top:2px}
+  .mech .card p{font-size:14px;color:var(--text)}
+  .fn{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .fn .card{border-left:3px solid var(--ok)}.fn .card:nth-child(2){border-left-color:var(--warn)}.fn .card:nth-child(3){border-left-color:var(--bad)}
+  .fn .ord{font-family:'JetBrains Mono';font-size:11px;color:var(--dim);margin-bottom:4px}
+  .cycle{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .cycle .card{border-top:3px solid var(--line)}
+  .cycle .card .d{font-family:'JetBrains Mono';font-size:11px;color:var(--acento);margin-bottom:4px}
+  .cagan{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;align-items:stretch}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Parte V</div>
+      <h1>Dinero, inflación y dolarización</h1>
+      <p class="sub">Qué pasa cuando el Estado se financia emitiendo, por qué ese financiamiento tiene un límite, y cómo Bolivia recorrió el ciclo completo en las dos direcciones.</p>
+    </div>
+    <div class="meta"><b>U III</b>Material adelantado en clase</div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>Emisión monetaria e impuesto inflacionario<small>Cuando el Estado financia parte de sus necesidades creando dinero, obtiene recursos reales a cambio de dinero recién emitido.</small></h2></div>
+    <div class="mech">
+      <div class="card"><p>El Estado emite dinero.</p></div>
+      <div class="card"><p>Con ese dinero adquiere bienes y servicios reales.</p></div>
+      <div class="card"><p>El aumento de liquidez presiona sobre los precios.</p></div>
+      <div class="card"><p>El nivel de precios aumenta.</p></div>
+      <div class="card"><p>El poder adquisitivo de los saldos que ya estaban en manos del público disminuye.</p></div>
+      <div class="card"><p>El Estado obtiene recursos reales; los tenedores de dinero soportan la pérdida.</p></div>
+    </div>
+    <div class="callout"><b>No es un impuesto legal</b> como el IVA. Es una forma de describir la transferencia de recursos asociada a la pérdida de poder adquisitivo del dinero causada por la inflación y, en particular, al financiamiento mediante creación monetaria.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Señoreaje e impuesto inflacionario<small>Parecidos, distintos. La analogía tributaria es exacta: π es la tasa del impuesto y M/P es la base.</small></h2></div>
+    <div class="formulas">
+      <div class="f">Señoreaje: S = ΔM / P</div>
+      <div class="f">Impuesto inflacionario: IT = π × (M/P)</div>
+    </div>
+    <div class="grid wide" style="margin-top:12px">
+      <div class="card"><h4>Señoreaje</h4><p>Recursos reales que obtiene el emisor al crear dinero nuevo.</p></div>
+      <div class="card"><h4>Impuesto inflacionario</h4><p>Pérdida de poder adquisitivo que sufren los tenedores de saldos ya existentes. En equilibrio de largo plazo con saldos reales constantes, ambos coinciden.</p></div>
+    </div>
+    <p style="margin-top:12px"><b>Por qué es difícil de eludir.</b> Las personas no pueden dejar de gastar: necesitan alimentos, servicios, transporte. Pero sí pueden reducir saldos en moneda nacional, aumentar la velocidad de circulación o buscar activos alternativos. Esa última posibilidad erosiona el impuesto.</p>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>Simulador: la curva de Laffer inflacionaria<small>Como IT = π × (M/P) y M/P cae cuando π sube, la recaudación no crece indefinidamente. Existe una inflación que la maximiza; más allá, el gobierno recauda menos aunque emita más.</small></h2></div>
+    <div class="sim">
+      <div>
+        <div class="ctl"><label for="pi">π<small>Inflación anual</small></label><input type="range" id="pi" min="0" max="300" step="1" value="20"><output id="opi"></output></div>
+        <div class="ctl"><label for="alpha">α<small>Huida del dinero</small></label><input type="range" id="alpha" min="0.2" max="3" step="0.1" value="1"><output id="oalpha"></output></div>
+        <div class="kpi">
+          <div><small>Saldos reales M/P</small><b id="kmp"></b></div>
+          <div><small>Recaudación IT</small><b id="kit"></b></div>
+          <div><small>π que maximiza</small><b id="kmax"></b></div>
+        </div>
+        <div class="note" id="note"></div>
+      </div>
+      <div><canvas class="chart" id="cv"></canvas></div>
+    </div>
+    <div class="callout bad" style="margin-top:12px"><b>Dinámica de hiperinflación.</b> Un gobierno que necesita un monto real fijo y ve caer su recaudación debe emitir cada vez más rápido, lo que acelera la caída de la demanda de dinero: espiral.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">04</div><h2>La teoría cuantitativa ordena el mecanismo<small>Si V e Y son estables, un aumento de M se traduce casi íntegramente en aumento de P.</small></h2></div>
+    <div class="formulas">
+      <div class="f">M × V = P × Y</div>
+      <div class="f">%ΔM + %ΔV ≈ %ΔP + %ΔY</div>
+    </div>
+    <div class="callout" style="margin-top:12px"><b>Advertencia.</b> En una crisis de confianza V no es estable: cuando la gente huye del dinero, la velocidad se dispara y los precios suben más que la cantidad de dinero. Ese es el puente hacia la hiperinflación.</div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">05</div><h2>Las tres funciones del dinero y en qué orden se pierden<small>La inflación las destruye en un orden característico que permite diagnosticar en qué fase está una economía.</small></h2></div>
+    <div class="fn">
+      <div class="card"><div class="ord">SE PIERDE PRIMERO</div><h4>Reserva de valor</h4><p>Con inflación moderada la gente ya deja de ahorrar en moneda nacional, pero sigue usándola para comprar.</p></div>
+      <div class="card"><div class="ord">SE PIERDE DESPUÉS</div><h4>Unidad de cuenta</h4><p>Los precios empiezan a fijarse en dólares aunque el pago se haga en moneda local. Aparecen los carteles con precios en divisa.</p></div>
+      <div class="card"><div class="ord">SE PIERDE AL FINAL</div><h4>Medio de pago</h4><p>Solo en casos extremos: es la más difícil de sustituir en el día a día.</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">06</div><h2>Hiperinflación: definición operativa<small>Convención de Cagan (1956): inflación mensual superior al 50%, equivalente a más de 12.000% anual si se sostiene.</small></h2></div>
+    <div class="cagan">
+      <div class="stat"><div><small>Umbral Cagan</small><b class="bad">50%</b><span>mensual</span></div></div>
+      <div class="stat"><div><small>Bolivia 1984–85</small><b class="bad">×625</b><span>precios en 16 meses</span></div></div>
+      <div class="stat"><div><small>Bolivia 2025</small><b class="warn">20,40%</b><span>anual · no es hiperinflación</span></div></div>
+    </div>
+    <div class="callout" style="margin-top:12px"><b>Error de escala.</b> La inflación de 2025 fue la más alta desde 1988 y es un problema serio, pero está a dos órdenes de magnitud del episodio de 1984–1985. Llamarla hiperinflación es un error que un examinador penaliza.</div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">07</div><h2>El ciclo boliviano: dolarización, bolivianización y después<small>Bolivia es un caso de manual porque recorrió el ciclo en las dos direcciones.</small></h2></div>
+    <div class="cycle">
+      <div class="card"><div class="d">AÑOS 80 Y 90</div><h4>Dolarización</h4><p>Tras la hiperinflación, buena parte de los depósitos y créditos del sistema financiero estaba denominada en dólares.</p></div>
+      <div class="card"><div class="d">2006–2014</div><h4>Bolivianización</h4><p>Estabilidad de precios, tipo de cambio apreciándose y medidas deliberadas: encaje diferenciado por moneda, impuesto a transacciones en divisa, spread cambiario. Política explícita, no fenómeno espontáneo.</p></div>
+      <div class="card"><div class="d">2023–2026</div><h4>Tensión reciente</h4><p>Escasez de divisas, brecha cambiaria e inflación al alza. Reaparecen las conductas de cobertura: dólar como reserva de valor y precios fijados en divisa.</p></div>
+    </div>
+    <div class="callout info" style="margin-top:12px"><b>Lección.</b> La bolivianización no es irreversible. Depende de que la moneda nacional siga cumpliendo sus funciones, en particular la de reserva de valor, que es la primera que se pierde.</div>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>Apuntes secciones 5, 6 y 7</div></footer>
+  <div class="aguayo"></div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);const f=(n,d)=>n.toFixed(d).replace('.',',');
+  const cv=$('cv'),ctx=cv.getContext('2d');
+  const mp=(pi,a)=>100*Math.exp(-a*pi/100);          // demanda de dinero tipo Cagan
+  const it=(pi,a)=>pi/100*mp(pi,a);
+  function draw(){
+    const pi=+$('pi').value,a=+$('alpha').value;
+    $('opi').textContent=pi+'%';$('oalpha').textContent=f(a,1);
+    const pimax=100/a;
+    $('kmp').textContent=f(mp(pi,a),1);$('kit').textContent=f(it(pi,a),1);$('kmax').textContent=f(pimax,0)+'%';
+    const r=cv.parentElement.getBoundingClientRect();const W=Math.max(280,Math.floor(r.width)),H=Math.round(W*0.62),dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const pad={l:44,r:14,t:20,b:34},maxIT=it(pimax,a)*1.15;
+    const X=p=>pad.l+p/300*(W-pad.l-pad.r),Y=v=>H-pad.b-v/maxIT*(H-pad.t-pad.b);
+    ctx.strokeStyle='#26262E';ctx.lineWidth=1;ctx.font='500 10px JetBrains Mono';ctx.fillStyle='#9A9890';
+    for(let g=0;g<=4;g++){const y=pad.t+g*(H-pad.t-pad.b)/4;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();}
+    ctx.textAlign='center';for(let p=0;p<=300;p+=50){ctx.fillText(p+'%',X(p),H-pad.b+14);}
+    ctx.strokeStyle='#8A8880';ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,H-pad.b);ctx.lineTo(W-pad.r,H-pad.b);ctx.stroke();
+    ctx.fillStyle='#ECEAE4';ctx.font='600 11px Manrope';ctx.textAlign='right';ctx.fillText('inflación π',W-pad.r,H-pad.b+28);ctx.textAlign='left';ctx.fillText('recaudación real IT',pad.l+4,pad.t-6);
+    ctx.beginPath();ctx.strokeStyle='#E8236B';ctx.lineWidth=3;for(let p=0;p<=300;p+=2){const x=X(p),y=Y(it(p,a));p?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();
+    ctx.setLineDash([4,4]);ctx.strokeStyle='#6B6A64';ctx.beginPath();ctx.moveTo(X(pimax),pad.t);ctx.lineTo(X(pimax),H-pad.b);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#FFC53D';ctx.beginPath();ctx.arc(X(pi),Y(it(pi,a)),7,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#0D0D10';ctx.lineWidth=3;ctx.stroke();
+    ctx.fillStyle='#ECEAE4';ctx.font='700 12px Manrope';ctx.textAlign='left';ctx.fillText('π = '+pi+'%',Math.min(X(pi)+10,W-70),Y(it(pi,a))-8);
+    let n;
+    if(pi<pimax*0.9)n=`Con π = ${pi}% el efecto tasa domina: subir la inflación aún <b>aumenta</b> la recaudación. La base M/P (${f(mp(pi,a),1)}) todavía es alta.`;
+    else if(pi<=pimax*1.1)n=`<b>Máximo de la curva.</b> Alrededor de π = ${f(pimax,0)}% el gobierno recauda lo máximo posible por emisión. Más inflación ya no rinde.`;
+    else n=`Con π = ${pi}% la base cae más rápido que lo que sube la tasa: <b>la recaudación baja</b> aunque el gobierno emita más. La gente huye del dinero (M/P = ${f(mp(pi,a),1)}). Zona de espiral.`;
+    n+=` α mide cuán rápido la gente abandona la moneda al subir π; con más dolarización (α alto) el máximo se alcanza antes, en π = 100/α.`;
+    $('note').innerHTML=n;
+  }
+  ['pi','alpha'].forEach(id=>$(id).addEventListener('input',draw));window.addEventListener('resize',draw);draw();
+})();
+</script>
+</body>
+</html>

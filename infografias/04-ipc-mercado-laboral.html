@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte IV · IPC, inflación y mercado laboral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .steps4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;counter-reset:s}
+  .steps4 .card{position:relative;padding-top:20px}
+  .steps4 .card::before{counter-increment:s;content:counter(s);position:absolute;top:-12px;left:14px;width:26px;height:26px;border-radius:50%;background:var(--acento);color:#fff;font:700 13px 'JetBrains Mono';display:flex;align-items:center;justify-content:center}
+  .months{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:6px}
+  .months label{display:block;font-family:'JetBrains Mono';font-size:10px;color:var(--dim);margin-bottom:3px;text-align:center}
+  .months input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--text);font:600 13px 'JetBrains Mono';padding:7px 4px;text-align:center;outline:0}
+  .months input:focus{border-color:var(--acento)}
+  .pyr{display:flex;flex-direction:column;gap:6px;align-items:center}
+  .pyr div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;text-align:center;font-size:13px;color:var(--muted);transition:width .3s}
+  .pyr div b{display:block;color:var(--text);font-family:'JetBrains Mono';font-size:15px}
+  .pyr .pet{width:100%;border-color:var(--dim)}.pyr .pea{width:82%;border-color:var(--azul)}.pyr .occ{width:64%;border-color:var(--ok)}.pyr .des{width:40%;border-color:var(--bad)}
+  .pyr .pei{width:82%;border-color:var(--warn)}
+  .lab2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+  @media (max-width:720px){.lab2{grid-template-columns:1fr}}
+  .canal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Parte IV</div>
+      <h1>Nivel de precios, IPC y mercado laboral</h1>
+      <p class="sub">Cómo se construye el índice que mide la inflación que sienten los hogares, las tres tasas que no hay que confundir, y por qué la tasa de desempleo no basta.</p>
+    </div>
+    <div class="meta"><b>S 5</b>Anticipa la Sesión 5 y la Unidad II</div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>Cómo se construye el IPC<small>Un índice que resume la evolución de los precios de una canasta de bienes y servicios consumidos por los hogares, ponderados por su importancia en el gasto.</small></h2></div>
+    <div class="steps4">
+      <div class="card"><h4>Definir la canasta</h4><p>Qué consume un hogar representativo y en qué proporción, según la encuesta de presupuestos familiares.</p></div>
+      <div class="card"><h4>Fijar ponderaciones</h4><p>Cada bien recibe un peso igual a su participación en el gasto total. El pan pesa más que los televisores.</p></div>
+      <div class="card"><h4>Recoger precios</h4><p>Periódicamente, en las mismas ciudades y establecimientos.</p></div>
+      <div class="card"><h4>Calcular el índice</h4><p>Promedio ponderado, normalizado a 100 en el período base.</p></div>
+    </div>
+    <div class="callout info"><b>En Bolivia</b> lo calcula el INE con una canasta de 397 productos y servicios, relevada en ciudades capitales y conurbaciones. La cifra nacional es un promedio: en diciembre de 2025 la variación mensual fue 1,66% en Potosí y 0,28% en la región metropolitana Kanata, con promedio nacional de 0,59%.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Las tres tasas de inflación<small>Inflación (%) = [(IPC<sub>t</sub> − IPC<sub>t−1</sub>) / IPC<sub>t−1</sub>] × 100. Según qué período sea t salen tres cifras distintas.</small></h2></div>
+    <div class="grid">
+      <div class="card"><h4><span>1</span>Mensual</h4><p>Variación respecto del mes anterior.</p><p class="mono" style="color:var(--text);margin-top:6px">0,59% · dic 2025</p></div>
+      <div class="card"><h4><span>2</span>Acumulada</h4><p>Desde diciembre del año anterior hasta el mes de referencia.</p><p class="mono" style="color:var(--text);margin-top:6px">20,40% · año 2025</p></div>
+      <div class="card"><h4><span>3</span>Interanual</h4><p>Respecto del mismo mes del año anterior.</p><p class="mono" style="color:var(--text);margin-top:6px">9,23% · jul 2026</p></div>
+    </div>
+    <p style="margin-top:12px">A fin de año, la acumulada y la interanual coinciden. En cualquier otro mes, no.</p>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>Calculadora: las inflaciones mensuales no se suman<small>Escribe la inflación de cada mes. Los precios se componen: (1 + π₁) × (1 + π₂) × … − 1.</small></h2></div>
+    <div class="sim">
+      <div>
+        <div class="months" id="months"></div>
+        <button class="reset" id="r2024">Bolivia 2024 (9,97%)</button> <button class="reset" id="r2025">Bolivia 2025 (20,40%)</button> <button class="reset" id="rflat">2% todos los meses</button>
+      </div>
+      <div>
+        <div class="kpi">
+          <div><small>Suma simple</small><b id="ssum" style="color:var(--bad)"></b></div>
+          <div><small>Acumulada real</small><b id="scomp" style="color:var(--ok)"></b></div>
+          <div><small>Poder adquisitivo</small><b id="spa"></b></div>
+        </div>
+        <div class="note" id="mnote"></div>
+      </div>
+    </div>
+    <div class="formulas" style="margin-top:12px">
+      <div class="f">Acumulada = Π(1 + π<sub>i</sub>) − 1</div>
+      <div class="f">Pérdida de poder adquisitivo = 1 − 1/(1 + π)</div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">04</div><h2>Por qué el impacto es desigual<small>Una misma tasa no produce el mismo efecto en todos los hogares. Tres canales.</small></h2></div>
+    <div class="canal">
+      <div class="card"><h4>Canal de la canasta</h4><p>Los hogares pobres destinan una fracción mayor del gasto a alimentos. Si la inflación se concentra en alimentos y transporte, su inflación efectiva supera el promedio nacional.</p></div>
+      <div class="card"><h4>Canal del activo</h4><p>Quien mantiene riqueza en efectivo o depósitos a tasa fija pierde; quien la tiene en bienes reales, divisas o activos indexados se protege.</p></div>
+      <div class="card"><h4>Canal de la deuda</h4><p>La inflación no esperada transfiere riqueza de acreedores a deudores. El mayor deudor suele ser el Estado: puerta de entrada al impuesto inflacionario (Parte V).</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">05</div><h2>Mercado laboral: PET, PEA y las tasas<small>Mueve los sliders para ver cómo cambian las tasas. Para ser desocupado hacen falta tres condiciones: no tener empleo, estar disponible y haber buscado activamente.</small></h2></div>
+    <div class="lab2">
+      <div>
+        <div class="ctl"><label for="pet">PET<small>En edad de trabajar</small></label><input type="range" id="pet" min="100" max="1000" step="10" value="700"><output id="opet"></output></div>
+        <div class="ctl"><label for="part">part.<small>Tasa de participación</small></label><input type="range" id="part" min="30" max="90" step="1" value="70"><output id="opart"></output></div>
+        <div class="ctl"><label for="des">u<small>Tasa de desempleo</small></label><input type="range" id="des" min="0" max="30" step="0.5" value="5"><output id="odes"></output></div>
+        <div class="kpi">
+          <div><small>PEA</small><b id="kpea"></b></div>
+          <div><small>Ocupados</small><b id="kocc"></b></div>
+          <div><small>Desocupados</small><b id="kdes"></b></div>
+          <div><small>Tasa de ocupación</small><b id="kocr"></b></div>
+        </div>
+        <div class="note" id="lnote"></div>
+      </div>
+      <div class="pyr">
+        <div class="pet" id="bpet"><b></b>PET = PEA + PEI</div>
+        <div class="pea" id="bpea"><b></b>PEA = ocupados + desocupados</div>
+        <div class="occ" id="bocc"><b></b>Ocupados</div>
+        <div class="des" id="bdes"><b></b>Desocupados</div>
+        <div class="pei" id="bpei"><b></b>PEI: estudiantes, cuidado del hogar, jubilados, desalentados</div>
+      </div>
+    </div>
+    <div class="formulas" style="margin-top:12px">
+      <div class="f">u = desocupados / PEA</div>
+      <div class="f">participación = PEA / PET</div>
+      <div class="f">ocupación = ocupados / PET</div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">06</div><h2>La trampa del trabajador desalentado<small>Como solo cuenta como desocupado quien busca activamente, la tasa de desempleo puede bajar mientras la situación laboral empeora.</small></h2></div>
+    <div class="flow">
+      <span>Recesión</span><i>→</i><span>Mucha gente deja de buscar</span><i>→</i><span>Sale de la PEA, pasa a la PEI</span><i>→</i><span class="hi">Tasa de desempleo baja</span><i>→</i><span>Pero la ocupación cayó</span>
+    </div>
+    <div class="callout" style="margin-top:14px"><b>Por eso la tasa de desempleo nunca se lee sola:</b> hay que mirar simultáneamente la tasa de participación y la de ocupación. Prueba en el simulador: baja la participación de 70 a 60 manteniendo u fija y observa qué pasa con los ocupados.</div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">07</div><h2>Bolivia: desempleo bajo, problema laboral grave<small>La explicación es estructural, no estadística.</small></h2></div>
+    <div class="grid wide">
+      <div class="card"><h4>Sin seguro de desempleo generalizado</h4><p>Casi nadie puede permitirse estar desocupado. Quien pierde su empleo formal no espera: pasa al comercio informal, al trabajo por cuenta propia o al empleo familiar. Formalmente está ocupado.</p></div>
+      <div class="card"><h4>El problema aparece en otros indicadores</h4><p>Subempleo, informalidad y baja productividad. Los indicadores relevantes son la tasa de informalidad, el subempleo por horas y por ingresos, y la proporción de ocupados sin aportes a la seguridad social. Unidad II.</p></div>
+    </div>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>Apuntes secciones 3 y 4</div></footer>
+  <div class="aguayo"></div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);const f=(n,d)=>n.toFixed(d).replace('.',',');
+  const M=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const b2025=[1.31,1.72,0.75,0.85,2.43,1.9,1.99,1.98,1.4,1.19,1.12,0.59];
+  const b2024=[0.6,0.7,0.6,0.5,0.5,0.4,0.9,1.6,1.2,1.5,0.6,0.5];
+  $('months').innerHTML=M.map((m,i)=>`<div><label>${m}</label><input type="number" step="0.01" id="m${i}"></div>`).join('');
+  function set(arr){arr.forEach((v,i)=>$('m'+i).value=v);calc();}
+  function calc(){let sum=0,comp=1;for(let i=0;i<12;i++){const v=+($('m'+i).value||0);sum+=v;comp*=1+v/100;}
+    const acc=(comp-1)*100, pa=(1-1/comp)*100;
+    $('ssum').textContent=f(sum,2)+'%';$('scomp').textContent=f(acc,2)+'%';$('spa').textContent='−'+f(pa,1)+'%';
+    $('mnote').innerHTML=`Sumar da <b>${f(sum,2)}%</b>; encadenar da <b>${f(acc,2)}%</b>. Diferencia: ${f(acc-sum,2)} puntos. Una canasta de Bs 1.000 termina costando Bs ${f(1000*comp,0)}. Un salario que no se movió perdió <b>${f(pa,1)}%</b> de poder de compra, que no es lo mismo que la inflación: "cuánto subieron los precios" y "cuánto menos puedo comprar" son preguntas distintas.`;}
+  for(let i=0;i<12;i++)$('m'+i).addEventListener('input',calc);
+  $('r2025').onclick=()=>set(b2025);$('r2024').onclick=()=>set(b2024);$('rflat').onclick=()=>set(Array(12).fill(2));
+  set(b2025);
+
+  function lab(){const pet=+$('pet').value,part=+$('part').value,u=+$('des').value;
+    const pea=pet*part/100,des=pea*u/100,occ=pea-des,pei=pet-pea,ocr=occ/pet*100;
+    $('opet').textContent=pet;$('opart').textContent=part+'%';$('odes').textContent=f(u,1)+'%';
+    $('kpea').textContent=f(pea,0);$('kocc').textContent=f(occ,0);$('kdes').textContent=f(des,0);$('kocr').textContent=f(ocr,1)+'%';
+    $('bpet').querySelector('b').textContent=f(pet,0);$('bpea').querySelector('b').textContent=f(pea,0);$('bocc').querySelector('b').textContent=f(occ,0);$('bdes').querySelector('b').textContent=f(des,0);$('bpei').querySelector('b').textContent=f(pei,0);
+    $('bpea').style.width=Math.max(30,part)+'%';$('bocc').style.width=Math.max(20,part*(1-u/100))+'%';$('bdes').style.width=Math.max(12,part*u/100+8)+'%';$('bpei').style.width=Math.max(20,100-part)+'%';
+    $('lnote').innerHTML=`De ${pet} personas en edad de trabajar, ${f(pea,0)} participan (${part}%) y ${f(pei,0)} no. Con desempleo de ${f(u,1)}%, hay ${f(occ,0)} ocupados: tasa de ocupación <b>${f(ocr,1)}%</b>. ${part<60?'<b>Participación baja:</b> aunque u sea baja, pocos están trabajando. Es el efecto del trabajador desalentado.':''}`;}
+  ['pet','part','des'].forEach(id=>$(id).addEventListener('input',lab));lab();
+})();
+</script>
+</body>
+</html>

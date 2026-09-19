@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte III · PIB nominal, real y deflactor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .cmp .card{border-top:3px solid var(--acento)}.cmp .card:nth-child(2){border-top-color:var(--azul)}
+  .cmp .big{font-family:'JetBrains Mono';font-size:30px;font-weight:600;margin:4px 0}
+  .cmp .big em{font-style:normal;font-size:13px;color:var(--muted);margin-left:6px}
+  .dvi table.t td:nth-child(2){color:var(--acento)} .dvi table.t td:nth-child(3){color:var(--azul)}
+  .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+  @media (max-width:720px){.split{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="aguayo"></div>
+  <header class="hero">
+    <div>
+      <div class="kicker">Macroeconomía · Unidad I · Parte III</div>
+      <h1>PIB nominal, PIB real y el deflactor</h1>
+      <p class="sub">¿La economía produjo más, o solo se encarecieron las cosas? Esta es la pregunta que separa el PIB nominal del real.</p>
+    </div>
+    <div class="meta"><b>S 4</b>Sesión</div>
+  </header>
+
+  <section>
+    <div class="h2"><div class="num">01</div><h2>El problema<small>En tres años las ventas de la panadería El Trigal pasaron de Bs 130 a Bs 207: +59%. ¿Produjo 59% más pan, o parte de ese aumento es solo porque el pan se volvió más caro?</small></h2></div>
+    <div class="cmp">
+      <div class="card"><h4>PIB nominal</h4><div class="big">Σ q<sub>t</sub> × p<sub>t</sub></div><p>Cantidad × precio del año corriente. Sube si se produce más <b>o</b> si los precios suben.</p></div>
+      <div class="card"><h4>PIB real</h4><div class="big">Σ q<sub>t</sub> × p<sub>base</sub></div><p>Cantidad × precio del año base. Sube <b>solo</b> si se produce más. Aísla el efecto precio.</p></div>
+      <div class="card"><h4>Deflactor</h4><div class="big">nominal / real × 100</div><p>Precio promedio de todo lo producido, comparado con el año base. Vale 100 en el año base por definición.</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">02</div><h2>Simulador: El Trigal a lo largo de tres años<small>Datos de clase: Año 1 100 panes a Bs 1,30; Año 2 110 a Bs 1,50; Año 3 115 a Bs 1,80. Cambia cantidades y precios y mira qué pasa con nominal, real, deflactor e inflación.</small></h2></div>
+    <div class="sim">
+      <div>
+        <div class="ctl"><label for="q2">q₂<small>Panes año 2</small></label><input type="range" id="q2" min="60" max="180" value="110"><output id="oq2"></output></div>
+        <div class="ctl"><label for="p2">p₂<small>Precio año 2</small></label><input type="range" id="p2" min="0.8" max="3" step="0.05" value="1.5"><output id="op2"></output></div>
+        <div class="ctl"><label for="q3">q₃<small>Panes año 3</small></label><input type="range" id="q3" min="60" max="180" value="115"><output id="oq3"></output></div>
+        <div class="ctl"><label for="p3">p₃<small>Precio año 3</small></label><input type="range" id="p3" min="0.8" max="3" step="0.05" value="1.8"><output id="op3"></output></div>
+        <div class="ctl"><label for="base">base<small>Año base</small></label><input type="range" id="base" min="1" max="3" step="1" value="1"><output id="obase"></output></div>
+        <button class="reset" id="reset">Volver a los datos de clase</button>
+        <div class="note" id="note"></div>
+      </div>
+      <div>
+        <div class="twrap"><table class="t" id="tbl"><thead><tr><th>Año</th><th>Nominal</th><th>Real</th><th>Deflactor</th><th>Inflación</th></tr></thead><tbody></tbody></table></div>
+        <div class="kpi">
+          <div><small>Crecimiento nominal 1→3</small><b id="gn"></b></div>
+          <div><small>Crecimiento real 1→3</small><b id="gr"></b></div>
+          <div><small>Inflación acumulada 1→3</small><b id="pi"></b></div>
+        </div>
+        <canvas class="chart" id="cv" style="margin-top:12px"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">03</div><h2>La identidad que conecta las tres tasas<small>Exacta y aproximada. La aproximación falla con tasas altas.</small></h2></div>
+    <div class="formulas">
+      <div class="f">(1 + g<sub>nominal</sub>) = (1 + g<sub>real</sub>) × (1 + π)</div>
+      <div class="f">g<sub>nominal</sub> ≈ g<sub>real</sub> + π <i>·</i> solo con tasas bajas</div>
+    </div>
+    <div class="verdict">
+      <div class="ok"><b>1,10 × 1,154 = 1,269</b>Año 1 → 2 con la identidad exacta: 26,9% de crecimiento nominal. Cierra.</div>
+      <div class="bad"><b>10,0% + 15,4% = 25,4%</b>Con la aproximación: 1,5 puntos de error. Es el término cruzado 0,10 × 0,154 que se descarta.</div>
+    </div>
+    <div class="callout"><b>Regla práctica.</b> Con inflación de un dígito la aproximación sirve. Con la inflación boliviana de 2025 (20,40%) el término cruzado pesa demasiado: se usa la identidad exacta. Explicitar cuál se usó y por qué vale puntos.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">04</div><h2>El año base<small>El nivel del PIB real cambia según el año base; con un solo bien la tasa de crecimiento no. Con muchos bienes y precios relativos cambiantes, sí.</small></h2></div>
+    <div class="grid wide">
+      <div class="card"><h4>El problema</h4><p>Con precios de un año base fijo y antiguo se sobrestima el crecimiento real de los bienes cuyo precio relativo cayó mucho (computadoras).</p></div>
+      <div class="card"><h4>La solución: índices encadenados</h4><p>Actualizan las ponderaciones cada año y encadenan las tasas de variación en lugar de usar un único año base fijo. Es lo que usa la mayoría de los países.</p></div>
+      <div class="card"><h4>Bolivia</h4><p>Trabajó mucho tiempo con 1990 como año base. La actualización a base 2017 modifica las series históricas: antes de comparar dos tasas, verificar el año base y si la serie fue empalmada.</p></div>
+    </div>
+  </section>
+
+  <section class="dvi">
+    <div class="h2"><div class="num">05</div><h2>Deflactor del PIB e IPC: no son lo mismo<small>Ambos miden precios, pero de universos distintos.</small></h2></div>
+    <div class="twrap"><table class="t">
+      <thead><tr><th>Criterio</th><th>Deflactor del PIB</th><th>IPC</th></tr></thead>
+      <tbody>
+      <tr><td>Qué cubre</td><td>Todo lo producido dentro del país</td><td>Solo la canasta de consumo de los hogares</td></tr>
+      <tr><td>Bienes de capital</td><td>Incluidos</td><td>No incluidos</td></tr>
+      <tr><td>Bienes importados</td><td>No incluidos (no se producen aquí)</td><td>Incluidos si los hogares los consumen</td></tr>
+      <tr><td>Canasta</td><td>Variable: cambia con lo que se produce cada año</td><td>Fija: ponderaciones de un período de referencia</td></tr>
+      <tr><td>Tipo de índice</td><td>Paasche (cantidades del año corriente)</td><td>Laspeyres (cantidades del año base)</td></tr>
+      </tbody></table></div>
+    <div class="callout info"><b>Cuándo divergen en Bolivia.</b> Si sube el precio internacional del diésel importado, el IPC sube (los hogares pagan más por transporte y todo lo que encarece). El deflactor no sube por esa vía: el diésel importado no es producción interna. En una economía dependiente de combustibles importados, la inflación que siente el hogar puede ser bastante mayor que la del deflactor.</div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">06</div><h2>1985: cuando los precios se dispararon<small>La demostración más extrema de por qué la distinción nominal/real no es un tecnicismo.</small></h2></div>
+    <div class="stat">
+      <div><small>Precios abr 1984 → ago 1985</small><b class="bad">×625</b><span>multiplicación</span></div>
+      <div><small>PIB por habitante 1985 vs 1980</small><b class="bad">−20%</b><span>inferior</span></div>
+      <div><small>PIB real 1983</small><b class="bad">−6,6%</b><span>crisis previa</span></div>
+    </div>
+    <p style="margin-top:12px">En bolivianos corrientes, el PIB nominal de 1985 parecía gigantesco frente al de 1980. El PIB real, el que mide producción, había caído. Fuente: Gonzalo Chávez, <i>La Hiperinflación Boliviana</i>; <i>Crisis económica en Bolivia 1982-1985</i>.</p>
+  </section>
+
+  <section>
+    <div class="h2"><div class="num">07</div><h2>Lo que el PIB no mide<small>Nada de esto lo invalida; lo que invalida es usarlo como sinónimo de bienestar.</small></h2></div>
+    <div class="grid">
+      <div class="card"><h4>Producción no registrada</h4><p>La economía informal. En Bolivia es una porción muy grande de la actividad: el PIB medido subestima la producción efectiva.</p></div>
+      <div class="card"><h4>Trabajo doméstico y de cuidado</h4><p>No remunerado, mayoritariamente realizado por mujeres.</p></div>
+      <div class="card"><h4>Recursos naturales</h4><p>Extraer y vender gas suma al PIB; agotar la reserva no resta nada.</p></div>
+      <div class="card"><h4>Distribución</h4><p>Dos países con el mismo PIB per cápita pueden tener realidades sociales opuestas.</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="h2"><div class="num">08</div><h2>Errores frecuentes</h2></div>
+    <div class="err">
+      <div><b>Confundir el deflactor con el IPC</b>Miden universos distintos.</div>
+      <div><b>Olvidar que el deflactor vale 100 en el año base</b>Es consecuencia de la definición, no un dato a calcular.</div>
+      <div><b>Celebrar un crecimiento nominal alto</b>Puede ocultar alta inflación con poco o ningún crecimiento real. Bolivia, 1985.</div>
+      <div><b>Usar la aproximación con tasas altas</b>El término cruzado ya no es despreciable.</div>
+    </div>
+  </section>
+
+  <footer><div><b>Michelle Griffiths Boada</b> · Macroeconomía y Empresa · UCB · 2026</div><div>Apuntes Sesión 4</div></footer>
+  <div class="aguayo"></div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const f=(n,d)=>n.toFixed(d).replace('.',',');
+  const DEF={q2:110,p2:1.5,q3:115,p3:1.8,base:1};
+  const cv=$('cv'),ctx=cv.getContext('2d');
+  function draw(rows){
+    const r=cv.parentElement.getBoundingClientRect();const W=Math.max(280,Math.floor(r.width)),H=Math.round(W*0.5),dpr=window.devicePixelRatio||1;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const pad={l:44,r:14,t:18,b:28};const max=Math.max(...rows.map(x=>Math.max(x.nom,x.real)))*1.1;
+    const X=i=>pad.l+(i+0.5)*(W-pad.l-pad.r)/3, Y=v=>H-pad.b-v/max*(H-pad.t-pad.b);
+    ctx.strokeStyle='#26262E';ctx.lineWidth=1;ctx.font='500 10px JetBrains Mono';ctx.fillStyle='#9A9890';ctx.textAlign='right';
+    for(let g=0;g<=4;g++){const v=max*g/4,y=Y(v);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();ctx.fillText(v.toFixed(0),pad.l-6,y+3);}
+    const bw=(W-pad.l-pad.r)/3*0.28;
+    rows.forEach((x,i)=>{ctx.fillStyle='#E8236B';ctx.fillRect(X(i)-bw-2,Y(x.nom),bw,H-pad.b-Y(x.nom));ctx.fillStyle='#4FB0FF';ctx.fillRect(X(i)+2,Y(x.real),bw,H-pad.b-Y(x.real));
+      ctx.fillStyle='#ECEAE4';ctx.textAlign='center';ctx.font='600 11px Manrope';ctx.fillText('Año '+(i+1),X(i),H-10);});
+    ctx.font='600 11px Manrope';ctx.textAlign='left';ctx.fillStyle='#E8236B';ctx.fillText('■ Nominal',pad.l+4,pad.t-4);ctx.fillStyle='#4FB0FF';ctx.fillText('■ Real',pad.l+74,pad.t-4);
+  }
+  function update(){
+    const q=[100,+$('q2').value,+$('q3').value], p=[1.3,+$('p2').value,+$('p3').value], b=+$('base').value-1;
+    $('oq2').textContent=q[1];$('op2').textContent='Bs '+f(p[1],2);$('oq3').textContent=q[2];$('op3').textContent='Bs '+f(p[2],2);$('obase').textContent='Año '+(b+1);
+    const rows=q.map((qq,i)=>({nom:qq*p[i],real:qq*p[b]}));
+    rows.forEach((r,i)=>{r.def=r.nom/r.real*100;r.inf=i?(r.def/rows[i-1].def-1)*100:null;});
+    $('tbl').querySelector('tbody').innerHTML=rows.map((r,i)=>`<tr><td>Año ${i+1}${i===b?' (base)':''}</td><td class="n">Bs ${f(r.nom,2)}</td><td class="n">Bs ${f(r.real,2)}</td><td class="n">${f(r.def,1)}</td><td class="n">${r.inf===null?'—':f(r.inf,1)+'%'}</td></tr>`).join('');
+    const gn=(rows[2].nom/rows[0].nom-1)*100, gr=(rows[2].real/rows[0].real-1)*100, pi=(rows[2].def/rows[0].def-1)*100;
+    $('gn').textContent=f(gn,1)+'%';$('gr').textContent=f(gr,1)+'%';$('pi').textContent=f(pi,1)+'%';
+    $('gr').style.color=gr<0?'#FF4D5E':'#3DD68C';
+    let n=`De ${f(gn,1)}% de crecimiento nominal, <b>${f(gr,1)}%</b> fue producción real adicional; el resto (${f(pi,1)}% acumulado) es aumento de precios.`;
+    if(gr<0&&gn>0)n+=' <b>Caso 1985 en miniatura:</b> el PIB nominal crece mientras la producción real cae.';
+    if(Math.abs(gr+pi-gn)>1.5)n+=` La aproximación g<sub>n</sub> ≈ g<sub>r</sub> + π daría ${f(gr+pi,1)}%: error de ${f(Math.abs(gr+pi-gn),1)} puntos. Con estas tasas se usa la identidad exacta.`;
+    $('note').innerHTML=n;draw(rows);
+  }
+  ['q2','p2','q3','p3','base'].forEach(id=>$(id).addEventListener('input',update));
+  $('reset').addEventListener('click',()=>{for(const k in DEF)$(k).value=DEF[k];update();});
+  window.addEventListener('resize',update);update();
+})();
+</script>
+</body>
+</html>
